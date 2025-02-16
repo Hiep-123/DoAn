@@ -4,11 +4,7 @@ import { dataMenu } from './constants'
 import { IoHomeOutline } from "react-icons/io5";
 import { CiSearch } from "react-icons/ci";
 import { CiUser } from "react-icons/ci";
-<<<<<<< HEAD
 import Button from '../Button/Button'
-=======
-import Button from '@components/Button/Button'
->>>>>>> 8d49d79 (update code section advanceHeadling)
 function Header() {
     const { container, containerHeader, containerBox, containerMenu,
         containerBoxIcon, menu

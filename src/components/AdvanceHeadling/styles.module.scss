@@ -22,6 +22,7 @@
         gap: 20px;
         flex-direction: column;
         padding: 15px;
+        padding-top: 80px;
 
         .title {
             font-size: 20px;
@@ -48,9 +49,9 @@
             gap: 50px;
         }
 
-.button{
-    margin-top: 100px;
-}
+        .button {
+            margin-top: 100px;
+        }
     }
 }
 
