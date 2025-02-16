@@ -1,0 +1,46 @@
+.container {
+    background-image: url("https://xstore.8theme.com/elementor/demos/rental-car/wp-content/uploads/sites/81/2022/07/03_BANNER-min.jpeg");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 836px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .containerBanner {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 1092px;
+
+        .text1 {
+            font-size: 17px;
+            font-weight: 700;
+            text-transform: uppercase;
+            line-height: 22px;
+            color: #ADF1D2;
+            letter-spacing: 3px;
+
+        }
+
+        .text2 {
+            font-size: 80px;
+            font-weight: 700;
+            color: #ffffff;
+            text-align: center;
+            width: 800px;
+        }
+
+        .text3{
+            margin: 30px 40px 0;
+            font-size: 19px;
+            color: #ffffff;
+            text-align: center;
+            font-weight: 400;
+            line-height: 30px;
+            width: 700px;
+        }
+    }
+}

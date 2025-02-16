@@ -1,0 +1,65 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    left: 0;
+    right: 0;
+    position: absolute;
+}
+
+.containerHeader {
+    width: 1407px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 150px;
+<<<<<<< HEAD
+    ;
+=======
+    
+>>>>>>> 8d49d79 (update code section advanceHeadling)
+}
+
+.containerBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.containerBoxIcon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    padding: 10px 8px;
+    font-size: 18px;
+    font-weight: 500;
+    color: #fff;
+<<<<<<< HEAD
+=======
+
+    &:hover{
+        color: rgb(31, 244, 215);
+    }
+>>>>>>> 8d49d79 (update code section advanceHeadling)
+}
+
+.containerMenu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
