@@ -1,0 +1,41 @@
+@import '@styles/main.module.scss';
+
+
+.container {
+    display: flex;
+    justify-content: flex-start;
+    gap: 20px;
+    flex-direction: column;
+
+    .title {
+        font-size: 22px;
+        font-weight: 700;
+        text-transform: uppercase;
+        line-height: 20px;
+        letter-spacing: 4px;
+        color: #3C43ED;
+    }
+
+    .des {
+        font-size: 22px;
+        color: #2F3238;
+        font-family: "Epilogue", Sans-serif;
+        font-size: 40px;
+        font-weight: 700;
+        line-height: 41px;
+
+        span {
+            color: #3C43ED;
+        }
+    }
+
+    .subDes {
+        color: #888888;
+        font-size: 20px;
+        font-weight: 400;
+        line-height: 28px;
+        margin-bottom: 30px;
+    }
+
+
+}

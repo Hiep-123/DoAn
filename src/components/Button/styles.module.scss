@@ -1,51 +1,40 @@
+
+
 .button {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 160px;
-    height: 48px;
-    background-color: #adf1d2;
-    color: #0b0033;
-    font-size: 18px;
+    width: 170px;
+    height: 55px;
     border: 1px solid #e1e1e1;
     border-radius: 5px;
+    cursor: pointer;
+}
 
-    .button {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 170px;
-        height: 55px;
-        border: 1px solid #e1e1e1;
-        border-radius: 5px;
-        cursor: pointer;
-    }
+.buttonGreen {
+    background-color: #adf1d2;
+    color: #0b0033;
+    font-size: 20px;
+    font-weight: 600;
+}
 
-    .buttonGreen {
-        background-color: #adf1d2;
-        color: #0b0033;
-        font-size: 20px;
-        font-weight: 600;
-    }
+.buttonPrimary {
+    width: 200px;
+    height: 60px;
+    font-size: 19px;
+    font-weight: 500;
+    line-height: 22px;
+    color: #FFFFFF;
+    padding: 15px 40px;
+    background-color: #3C43ED;
+    background-size: 100% 200%;
+    background-position: top;
+    transition: background-position 0.5s ease-in-out, background-color 0.5s ease-in-out;
 
-    .buttonPrimary {
-        width: 200px;
-        height: 60px;
-        font-size: 19px;
-        font-weight: 500;
-        line-height: 22px;
-        color: #FFFFFF;
-        padding: 15px 40px;
-        background-color: #3C43ED;
+    &:hover {
+        background-color: #0b0033;
         background-size: 100% 200%;
-        background-position: top;
-        transition: background-position 0.5s ease-in-out, background-color 0.5s ease-in-out;
-
-        &:hover {
-            background-color: #0b0033;
-            background-size: 100% 200%;
-            background-position: bottom;
-            color: #FFFFFF;
-        }
+        background-position: bottom;
+        color: #FFFFFF;
     }
 }

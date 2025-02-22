@@ -3,7 +3,7 @@ import styles from './styles.module.scss'
 import Button from '@components/Button/Button'
 import ShowInfoOffer from './ShowInfoOffer/ShowInfoOffer';
 function AdvanceHeadling() {
-    const { container, containerImg, containerOffer, title, info, button ,boxShow} = styles;
+    const { container, containerImg, containerOffer, title, info, button, boxShow } = styles;
     const data = [
         { src: 'https://xstore.8theme.com/elementor/demos/rental-car/wp-content/uploads/sites/81/2022/07/Icon_1-min.jpeg', title: 'No Counter Queues' },
         { src: 'https://xstore.8theme.com/elementor/demos/rental-car/wp-content/uploads/sites/81/2022/07/Icon_2-min.jpeg', title: 'From 1 To 90 Days' },
@@ -25,11 +25,11 @@ function AdvanceHeadling() {
                 <div className={title}>What we offer</div>
                 <div className={info}>Car Rental, How It Should <span style={{ color: '#2962ff' }}>Be</span></div>
                 <div className={boxShow}>
-                    <ShowInfoOffer data={data.slice(0,4)}/>
-                    <ShowInfoOffer data={data.slice(4,data.length)}/>
+                    <ShowInfoOffer data={data.slice(0, 4)} />
+                    <ShowInfoOffer data={data.slice(4, data.length)} />
                 </div>
                 <div className={button}>
-                    <Button content={'View Service'} isPrimary={true}/>
+                    <Button content={'View Service'} isPrimary={true} />
                 </div>
             </div>
 
