@@ -9,17 +9,18 @@
     font-size: 18px;
     border: 1px solid #e1e1e1;
     border-radius: 5px;
+}
 
-    .button {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 170px;
-        height: 55px;
-        border: 1px solid #e1e1e1;
-        border-radius: 5px;
-        cursor: pointer;
-    }
+.button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 170px;
+    height: 55px;
+    border: 1px solid #e1e1e1;
+    border-radius: 5px;
+    cursor: pointer;
+}
 
 .buttonGreen {
     background-color: #adf1d2;
@@ -47,3 +48,4 @@
         background-position: bottom;
         color: #FFFFFF;
     }
+}
