@@ -6,13 +6,14 @@
     width: 1500px;
     height: 378px;
     margin-top: 70px;
+    gap:30px;
+
     .containerBox {
         display: flex;
         justify-content: flex-start;
         align-items: flex-start;
         flex-direction: column;
         width: 25%;
-
         .title {
             font-size: 20px;
             font-weight: 600;
@@ -29,7 +30,7 @@
         }
 
         .subTitle {
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 400;
             color: #888;
             margin-bottom: 15px;

@@ -17,7 +17,6 @@ function SliderCommon() {
         prevArrow: <IoArrowBackOutline />
     };
     const { data } = useContext(StoreContext)
-    console.log(data)
     return (
         <Slider {...settings}>
             {data.map((item) => {

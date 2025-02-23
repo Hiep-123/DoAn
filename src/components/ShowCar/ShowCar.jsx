@@ -3,10 +3,11 @@ import React from 'react'
 import MainLayout from '@components/Layout/Layout'
 import styles from './styles.module.scss'
 import SliderCommon from '@components/SliderCommon/SliderCommon';
+import { SiHonda, SiMazda, SiMercedes, SiToyota } from "react-icons/si";
 
 function ShowCar() {
-    const { container, title, des, subDes } = styles
-    
+    const { container, title, des, subDes, boxIcon, icon, lineRight, lineLeft } = styles
+
 
     return (
         <MainLayout>
@@ -23,8 +24,45 @@ function ShowCar() {
                 <div>
                     <SliderCommon />
                 </div>
+            </div>
+            <div className={lineLeft} />
+
+            <div className={boxIcon}>
+
+                <div className={icon} style={{ cursor: 'pointer' }}>
+                    <SiHonda color={'#3C43ED'} size={'60px'} /> <span style={{
+                        color: '#3C43ED',
+                        fontSize: '30px',
+                        fontWeight: '700',
+                    }}>HONDA</span>
+                </div>
+
+                <div className={icon} style={{ cursor: 'pointer' }}>
+                    <SiMazda color={'#3C43ED'} size={'60px'} /> <span style={{
+                        color: '#3C43ED',
+                        fontSize: '30px',
+                        fontWeight: '700'
+                    }}>MAZDA</span>
+                </div>
+
+                <div className={icon} style={{ cursor: 'pointer' }}>
+                    <SiMercedes color={'#3C43ED'} size={'60px'} /> <span style={{
+                        color: '#3C43ED',
+                        fontSize: '30px',
+                        fontWeight: '700'
+                    }}>MERCEDES</span>
+                </div>
+
+                <div className={icon} style={{ cursor: 'pointer' }}>
+                    <SiToyota color={'#3C43ED'} size={'60px'} /> <span style={{
+                        color: '#3C43ED',
+                        fontSize: '30px',
+                        fontWeight: '700'
+                    }}>TOYOTA</span>
+                </div>
 
             </div>
+            <div className={lineRight} />
         </MainLayout>
     );
 

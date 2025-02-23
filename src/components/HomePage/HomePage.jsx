@@ -6,6 +6,7 @@ import Section from '@components/Section/Section';
 import AdvanceHeadling from '@components/AdvanceHeadling/AdvanceHeadling';
 import ShowCar from '@components/ShowCar/ShowCar';
 import { StoreProvider } from '@/context/StoreProvider';
+import SectionRentalCar from '@components/SectionRentalCar/SectionRentalCar';
 function HomePage() {
     const { container } = styles;
     return (
@@ -16,8 +17,8 @@ function HomePage() {
                 <Section />
                 <AdvanceHeadling />
                 <ShowCar />
+                <SectionRentalCar />
             </StoreProvider>
-
         </div>
     )
 }

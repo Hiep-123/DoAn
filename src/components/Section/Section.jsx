@@ -11,6 +11,7 @@ function Section() {
         <MainLayout>
             <div className={container}>
                 <div className={containerBox}>
+                    
                     <div className={title} style={{ marginBottom: '10px' }}>
                         OUR DIFFERENT
                     </div>
@@ -20,6 +21,7 @@ function Section() {
                     <div className={subTitle}>
                         There are many variations of passage of lorem Ipsum availabile, but the majorit suffered.
                     </div>
+
                     <div className={boxIcon}>
                         <div className={icon}>
                             <FaFacebookF size={'18px'} color={'#888'} />
