@@ -1,12 +1,13 @@
-import React from 'react'
-
+import React, { useContext } from 'react'
 import MainLayout from '@components/Layout/Layout'
 import styles from './styles.module.scss'
 import SliderCommon from '@components/SliderCommon/SliderCommon';
 import { SiHonda, SiMazda, SiMercedes, SiToyota } from "react-icons/si";
+import { StoreContext } from '@/context/StoreProvider';
 
 function ShowCar() {
     const { container, title, des, subDes, boxIcon, icon, lineRight, lineLeft } = styles
+    const { data } = useContext(StoreContext)
 
 
     return (
@@ -22,7 +23,7 @@ function ShowCar() {
                     From compact 3-door cars to spacious SUVs and vans, we have everything you need
                 </div>
                 <div>
-                    <SliderCommon />
+                    <SliderCommon data={data} />
                 </div>
             </div>
             <div className={lineLeft} />

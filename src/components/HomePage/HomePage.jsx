@@ -7,6 +7,10 @@ import AdvanceHeadling from '@components/AdvanceHeadling/AdvanceHeadling';
 import ShowCar from '@components/ShowCar/ShowCar';
 import { StoreProvider } from '@/context/StoreProvider';
 import SectionRentalCar from '@components/SectionRentalCar/SectionRentalCar';
+import SectionDiscounts from '@components/SectionDiscounts/SectionDiscounts';
+import Populate from '@components/Populate/Populate';
+import BannerDowload from '@components/BannerDowload/BannerDowload';
+
 function HomePage() {
     const { container } = styles;
     return (
@@ -18,6 +22,9 @@ function HomePage() {
                 <AdvanceHeadling />
                 <ShowCar />
                 <SectionRentalCar />
+                <SectionDiscounts />
+                <Populate />
+                <BannerDowload />
             </StoreProvider>
         </div>
     )

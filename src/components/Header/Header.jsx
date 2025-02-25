@@ -15,7 +15,7 @@ function Header() {
                 <div className={containerBox}>
                     <div className={containerBoxIcon}>
                         <div style={{marginRight: '10px'}}>
-                            <IoHomeOutline size={'20px'} color={'rgb(31, 244, 215)'} />
+                            <IoHomeOutline size={'23px'} color={'rgb(31, 244, 215)'} />
                         </div>
                     </div>
                     <div className={containerMenu}>

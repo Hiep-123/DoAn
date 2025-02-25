@@ -1,0 +1,81 @@
+.container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    background-color: #3C43ED;
+    height: 250px;
+
+    .containerBox {
+        width: 57%;
+        display: flex;
+        justify-content: space-between;
+        position: relative;
+
+        .containerBox1 {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            gap: 20px;
+
+            .title {
+                margin-top: 10px;
+                font-family: "Epilogue", Sans-serif;
+                font-size: 36px;
+                font-weight: 700;
+                line-height: 1.4em;
+                color: #FFFFFF;
+            }
+
+            .des {
+                color: #FFFFFF;
+                font-family: "DM Sans", Sans-serif;
+                font-size: 23px;
+                font-weight: 500;
+                line-height: 28px;
+            }
+        }
+
+        .containerBox2 {
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 60px;
+            right: -15%;
+            top: 35%;
+
+            .premium {
+                text-decoration: underline;
+                font-size: 25px;
+                color: #adf1d2;
+
+                &:hover {
+                    color: white;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
+}
+
+.containerBox3 {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    bottom: -105px;
+
+    .box {
+        background-color: #f0f0fc;
+        width: 300px;
+        height: 137px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 10px;
+    }
+}

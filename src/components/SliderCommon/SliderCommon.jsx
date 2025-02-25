@@ -3,32 +3,62 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import ProductItem from '@components/ProductItem/ProductItem';
-import { IoArrowForward, IoArrowBackOutline } from "react-icons/io5";
+import { IoIosArrowRoundForward, IoIosArrowRoundBack } from "react-icons/io";
 import './style.css'
-import { StoreContext } from '@/context/StoreProvider';
-function SliderCommon() {
+import ShowPost from './showPost';
+
+function SliderCommon({ data, isPost, dataPost }) {
+    const CustomNextArrow = ({ onClick, isPost }) => {
+        return (
+            <IoIosArrowRoundForward
+                className={`slick-arrow slick-next ${isPost ? "testimonial-arrow" : "product-arrow"}`}
+                onClick={onClick}
+            />
+        );
+    };
+
+    // Mũi tên prev
+    const CustomPrevArrow = ({ onClick, isPost }) => {
+        return (
+            <IoIosArrowRoundBack
+                className={`slick-arrow slick-prev ${isPost ? "testimonial-arrow" : "product-arrow"}`}
+                onClick={onClick}
+            />
+        );
+    };
     var settings = {
         dots: false,
         infinite: true,
         speed: 500,
-        slidesToShow: 3,
+        slidesToShow: isPost ? 1 : 3,
         slidesToScroll: 1,
-        nextArrow: <IoArrowForward />,
-        prevArrow: <IoArrowBackOutline />
+        nextArrow: <CustomNextArrow isPost={isPost} />,
+        prevArrow: <CustomPrevArrow isPost={isPost} />
     };
-    const { data } = useContext(StoreContext)
+
+
     return (
-        <Slider {...settings}>
-            {data.map((item) => {
-                return <ProductItem src={item.img}
-                    categoryCar={item.category}
-                    brandCar={item.brandCar}
-                    price={item.price}
-                    description={item.des}
-                />
-           
-            })}
-        </Slider>
+
+        <div className={isPost ? "testimonial-slider" : ''}>
+            <Slider {...settings}>
+                {isPost
+                    ? dataPost?.map((item) => (
+                        <ShowPost rating={item.rating} name={item.name} country={item.country} post={item.post} />
+                    ))
+                    : data?.map((item, index) => (
+                        <div key={index}>
+                            <ProductItem
+                                src={item.img}
+                                categoryCar={item.category}
+                                brandCar={item.brandCar}
+                                price={item.price}
+                                description={item.des}
+                            />
+                        </div>
+                    ))}
+            </Slider>
+
+        </div>
     )
 }
 
