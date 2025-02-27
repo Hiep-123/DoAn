@@ -5,7 +5,7 @@ import useTranslateXImage from '@/hooks/translateXImage';
 import { GoStarFill } from 'react-icons/go';
 
 function Populate() {
-    const { container, containerBox1, containerBox2, title, des, img } = styles
+    const { container, containerBox1, containerBox2, title, des, img, downloadApp, dowloadBox, downloadButtons } = styles
     const { translateXPosition } = useTranslateXImage();
 
 
@@ -25,19 +25,33 @@ function Populate() {
                     What Say Our Clients <span style={{ color: '#3C43ED' }}>Let’s Check Check</span>
                 </h1>
                 <div style={{
-                    width:'800px'
+                    width: '800px'
                 }}>
                     <SliderCommon dataPost={dataPost} isPost />
                 </div>
             </div>
-            =
+            
             <div className={containerBox2}>
                 <div className={img} style={{
                     transform: `translateX(${translateXPosition}px)`,
                     transition: 'transform 1,5s ease'
                 }}>
                     <img src="https://xstore.b-cdn.net/elementor/demos/rental-car/wp-content/uploads/sites/81/2022/07/Image-min.png" alt=""
-                        width={580} height={650} />
+                        width={620} height={680} />
+                </div>
+            </div>
+
+            <div className={downloadApp}>
+                <div className={dowloadBox}>
+                    <h2>Download Our App Now! - XStore</h2>
+                    <p>
+                        We’re putting a car in your pocket so you can escape the city at top of button.
+                    </p>
+                </div>
+                <div className={downloadButtons}>
+                    <img src="https://xstore.b-cdn.net/elementor/demos/rental-car/wp-content/uploads/sites/81/2022/07/Group-9-min.png" alt=""
+                        width={400} height={60} 
+                        style={{cursor:'pointer'}}/>
                 </div>
             </div>
         </div >

@@ -1,0 +1,119 @@
+.containerClass {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 50px;
+    background-color: #fff;
+    margin-top: 150px;
+    position: relative;
+
+    .mapClass {
+        width: 50%;
+        background-image: url("https://xstore.8theme.com/elementor/demos/rental-car/wp-content/uploads/sites/81/2022/07/Image.jpeg"); // Đặt đường dẫn hình ảnh bản đồ phù hợp
+        background-size: cover;
+        background-repeat: no-repeat;
+        position: relative;
+        height: 350px;
+
+        .locationPinClass {
+            width: 15px;
+            height: 15px;
+            position: absolute;
+
+            &:nth-child(1) {
+                top: 20%;
+                left: 30%;
+
+            }
+
+            &:nth-child(2) {
+                top: 50%;
+                left: 50%;
+            }
+
+            &:nth-child(3) {
+                top: 50%;
+                left: 20%;
+            }
+
+            &:nth-child(4) {
+                top: 35%;
+                left: 75%;
+            }
+        }
+    }
+
+    >div {
+        width: 45%;
+    }
+
+    .boxInfo {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        .subtitleClass {
+            font-size: 20px;
+            text-transform: uppercase;
+            color: #3b82f6;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .titleClass {
+            font-size: 50px;
+            font-weight: bold;
+            color: #222;
+            width: 50%;
+
+            span {
+                color: #3b82f6;
+            }
+        }
+
+        .descriptionClass {
+            font-size: 22px;
+            color: #555;
+            margin: 20px 0;
+        }
+
+        .countriesListClass {
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            font-size: 21px;
+            color: #333;
+            flex-direction: column;
+            height: 150px;
+
+            span {
+                cursor: pointer;
+            }
+        }
+
+        .contactClass {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+            position: absolute;
+            bottom: -20%;
+            left: 40%;
+            img {
+                border-radius: 50%;
+                margin-right: 10px;
+            }
+
+            span {
+                font-size: 20px;
+                color: #222;
+
+                a {
+                    color: #3b82f6;
+                    text-decoration: none;
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+}

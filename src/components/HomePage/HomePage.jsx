@@ -9,7 +9,7 @@ import { StoreProvider } from '@/context/StoreProvider';
 import SectionRentalCar from '@components/SectionRentalCar/SectionRentalCar';
 import SectionDiscounts from '@components/SectionDiscounts/SectionDiscounts';
 import Populate from '@components/Populate/Populate';
-import BannerDowload from '@components/BannerDowload/BannerDowload';
+import SectionMap from '@components/SectionMap/SectionMap';
 
 function HomePage() {
     const { container } = styles;
@@ -24,7 +24,7 @@ function HomePage() {
                 <SectionRentalCar />
                 <SectionDiscounts />
                 <Populate />
-                <BannerDowload />
+                <SectionMap />
             </StoreProvider>
         </div>
     )
