@@ -10,6 +10,7 @@ import SectionRentalCar from '@components/SectionRentalCar/SectionRentalCar';
 import SectionDiscounts from '@components/SectionDiscounts/SectionDiscounts';
 import Populate from '@components/Populate/Populate';
 import SectionMap from '@components/SectionMap/SectionMap';
+import ArticleList from '@components/ArticleCard/ArticleList';
 
 function HomePage() {
     const { container } = styles;
@@ -25,6 +26,7 @@ function HomePage() {
                 <SectionDiscounts />
                 <Populate />
                 <SectionMap />
+                <ArticleList />
             </StoreProvider>
         </div>
     )

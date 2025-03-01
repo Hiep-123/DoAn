@@ -1,0 +1,141 @@
+@import '@styles/main.module.scss';
+
+.articleList {
+    font-family: sans-serif;
+    margin: 250px auto;
+    padding: 20px;
+
+    .articleHeader {
+        text-align: center;
+        margin-bottom: 30px;
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            line-height: 20px;
+            letter-spacing: 4px;
+            color: #3C43ED;
+        }
+
+        p {
+            margin-top: 40px;
+            color: #2F3238;
+            font-family: "Epilogue", Sans-serif;
+            font-size: 40px;
+            font-weight: 700;
+            line-height: 41px;
+        }
+    }
+
+    .articleCards {
+        margin-top: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 20px;
+        height: 600px;
+
+        .articleCard {
+            background-color: #fff;
+            padding: 20px;
+            box-sizing: border-box;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 22%; // Điều chỉnh chiều rộng để phù hợp với bố cục
+            margin-bottom: 20px;
+            height: 100%;
+            overflow: hidden;
+
+            div {
+                width: 100%;
+                overflow: hidden;
+                height: 300px;
+
+                .articleImage {
+                    width: 100%;
+                    height: 300px;
+                    margin-bottom: 15px;
+                    object-fit: cover;
+                    transition: transform 0.5s ease;
+
+                    &:hover {
+                        transform: scale(1.1);
+                    }
+                }
+            }
+
+            .articleContent {
+                width: 100%;
+                margin-top: 20px;
+
+                h3 {
+                    font-size: 1.5rem;
+                    margin-bottom: 20px;
+                    font-weight: 600;
+                }
+
+                p {
+                    margin-bottom: 20px;
+                    font-size: 18px;
+                    line-height: 23px;
+                    color: #888888;
+                }
+
+                a {
+                    font-size: 18px;
+                    font-weight: 400;
+                    fill: #3C43ED;
+                    color: #3C43ED;
+                    text-decoration: none;
+                    position: relative;
+
+                    &::after {
+                        content: '';
+                        position: absolute;
+                        left: 0;
+                        bottom: -3px;
+                        width: 0;
+                        height: 2px;
+                        background-color: #3C43ED;
+                        transition: width 0.3s ease; // Chỉ transition width
+                    }
+
+                    &:hover::after {
+                        width: 100%; // Gạch chân mở rộng khi hover
+                    }
+                }
+
+            .articleFooter {
+                width: 100%;
+                margin-top: 10px;
+                display: flex;
+                flex-direction: row;
+                height: 100px;
+
+                .boxIcon {
+                    margin-top: 20px;
+                    display: flex;
+                    justify-content: space-between; // Sử dụng space-between
+                    width: 100%; // Đảm bảo boxIcon chiếm toàn bộ chiều rộng
+                    border-top: 1px solid #e1e1e1;
+                    padding: 10px;
+                    gap: 15px;
+                    height: 100%;
+
+                    .Icon {
+                        flex: 1; // Thêm flex: 1;
+                        height: 100%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: flex-end;
+                        gap: 10px;
+                    }
+                }
+            }
+        }
+    }
+}
+}
