@@ -2,8 +2,8 @@ import React from "react";
 import styles from './styles.module.scss'
 import { FaLocationDot } from "react-icons/fa6";
 const SectionMap = () => {
-  const { containerClass, titleClass, subtitleClass, descriptionClass, countriesListClass, contactClass, mapClass, locationPinClass, boxInfo, Box1 ,
-    Box2,Box3,Box4
+  const { containerClass, titleClass, subtitleClass, descriptionClass, countriesListClass, contactClass, mapClass, locationPinClass, boxInfo, Box1,
+    Box2, Box3, Box4
   } = styles
 
   return (
@@ -13,7 +13,7 @@ const SectionMap = () => {
           <FaLocationDot color={'#3b82f6'} size={'30px'} />
           <div className={Box1}>
             <img src="https://xstore.8theme.com/elementor/demos/rental-car/wp-content/uploads/sites/81/2022/07/Image-1.jpeg" alt=""
-              width={330} height={180} />
+              width={360} height={190} />
             <h2>
               Cambria Heights
             </h2>
@@ -25,12 +25,12 @@ const SectionMap = () => {
             </div>
           </div>
         </div>
-        
+
         <div className={locationPinClass}>
           <FaLocationDot color={'#3b82f6'} size={'30px'} />
           <div className={Box4}>
             <img src="https://xstore.8theme.com/elementor/demos/rental-car/wp-content/uploads/sites/81/2022/07/Image-1.jpeg" alt=""
-              width={330} height={180} />
+              width={360} height={190} />
             <h2>
               Cambria Heights
             </h2>
@@ -47,7 +47,7 @@ const SectionMap = () => {
           <FaLocationDot color={'#3b82f6'} size={'30px'} />
           <div className={Box3}>
             <img src="https://xstore.8theme.com/elementor/demos/rental-car/wp-content/uploads/sites/81/2022/07/Image-1.jpeg" alt=""
-              width={330} height={180} />
+              width={360} height={190} />
             <h2>
               Cambria Heights
             </h2>
@@ -64,7 +64,7 @@ const SectionMap = () => {
           <FaLocationDot color={'#3b82f6'} size={'30px'} />
           <div className={Box2}>
             <img src="https://xstore.8theme.com/elementor/demos/rental-car/wp-content/uploads/sites/81/2022/07/Image-1.jpeg" alt=""
-              width={330} height={180} />
+              width={360} height={190} />
             <h2>
               Cambria Heights
             </h2>

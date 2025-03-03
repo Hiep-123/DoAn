@@ -11,6 +11,7 @@ import SectionDiscounts from '@components/SectionDiscounts/SectionDiscounts';
 import Populate from '@components/Populate/Populate';
 import SectionMap from '@components/SectionMap/SectionMap';
 import ArticleList from '@components/ArticleCard/ArticleList';
+import Footer from '@components/Footer/Footer';
 
 function HomePage() {
     const { container } = styles;
@@ -27,6 +28,7 @@ function HomePage() {
                 <Populate />
                 <SectionMap />
                 <ArticleList />
+                <Footer />
             </StoreProvider>
         </div>
     )
