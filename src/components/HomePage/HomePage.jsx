@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Header from '@components/Header/Header'
 import Banner from '@components/Banner/Banner'
 import styles from './styles.module.scss'

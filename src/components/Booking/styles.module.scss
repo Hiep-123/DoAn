@@ -1,0 +1,44 @@
+.containerFilter {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .boxLeft {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 25px;
+
+        .boxIcon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+    }
+
+    .boxRight {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 25px;
+    }
+}
+
+.selectBox {
+    width: 250px;
+    height: 40px;
+    font-size: 20px;
+    padding: 5px;
+    color: #717171;
+}
+
+.container {
+    width: 100%;
+    margin-top: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 200px;
+}

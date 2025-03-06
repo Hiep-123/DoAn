@@ -5,22 +5,31 @@ import { IoHomeOutline } from "react-icons/io5";
 import { CiSearch } from "react-icons/ci";
 import { CiUser } from "react-icons/ci";
 import Button from '../Button/Button'
+import { useNavigate } from "react-router";
+import Menu from './Menu';
 function Header() {
     const { container, containerHeader, containerBox, containerMenu,
         containerBoxIcon, menu
     } = styles;
+    const navigate = useNavigate();
+    const handleNavigateHome = () => {
+        navigate('/')
+    }
+    const handleNavigateBooking = () => {
+        navigate('/shop')
+    }
     return (
         <div className={container}>
             <div className={containerHeader}>
                 <div className={containerBox}>
                     <div className={containerBoxIcon}>
-                        <div style={{marginRight: '10px'}}>
+                        <div style={{ marginRight: '10px' }} onClick={handleNavigateHome}>
                             <IoHomeOutline size={'23px'} color={'rgb(31, 244, 215)'} />
                         </div>
                     </div>
                     <div className={containerMenu}>
                         {dataMenu.slice(0, 4).map((item) => {
-                            return <div className={menu} >{item.content}</div>
+                            return <Menu content={item.content} />
                         })}
                     </div>
                 </div>
@@ -37,8 +46,8 @@ function Header() {
                             <CiUser size={'25px'} />
                             Sign In
                         </div>
-                        <div>
-                            <Button content={'Book Now'} /> 
+                        <div onClick={handleNavigateBooking}>
+                            <Button content={'Book Now'} />
                         </div>
                     </div>
 

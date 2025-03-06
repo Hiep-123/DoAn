@@ -3,17 +3,37 @@
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
-    min-height: 836px;
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
+
     .containerBanner {
         display: flex;
         justify-content: center;
         align-items: center;
         flex-direction: column;
         width: 1092px;
+
+        .shop {
+            font-size: 23px;
+            color: white;
+            width: 15%;
+            text-align: center;
+
+            p {
+                cursor: pointer;
+
+                &:hover {
+                    color: #888;
+                }
+            }
+
+            span {
+                font-size: 48px;
+                font-weight: 700;
+            }
+        }
 
         .text1 {
             font-size: 22px;
@@ -33,7 +53,7 @@
             width: 800px;
         }
 
-        .text3{
+        .text3 {
             margin: 30px 40px 0;
             font-size: 19px;
             color: #ffffff;

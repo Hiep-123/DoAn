@@ -1,9 +1,17 @@
 import React from 'react'
 import styles from './styles.module.scss'
 import { GoStarFill } from 'react-icons/go';
+import { useLocation } from "react-router-dom";
 
 function ProductItem({ src, categoryCar, brandCar, price, description }) {
     const { container, containerProduct, containerItem, category, title, des } = styles;
+
+    const location = useLocation();
+
+    const width = location.pathname === '/shop' ? '402px' : '410px'
+    const height = location.pathname === '/shop' ? '420px' : '420px'
+
+
     const renderStar = (length) => {
         return Array.from({ length }, (_, index) => (
             <GoStarFill
@@ -17,7 +25,11 @@ function ProductItem({ src, categoryCar, brandCar, price, description }) {
     };
 
     return (
-        <div className={container} >
+        <div className={container}
+            style={{
+                width: `${width}`,
+                height: `${height}`
+            }}>
             <div className={containerProduct} >
                 <div className={containerItem}>
                     <img src={src} alt=""
@@ -38,7 +50,7 @@ function ProductItem({ src, categoryCar, brandCar, price, description }) {
             </div>
 
         </div>
-        
+
     )
 }
 
