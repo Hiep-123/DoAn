@@ -6,8 +6,13 @@ import ProductItem from '@components/ProductItem/ProductItem';
 import { IoIosArrowRoundForward, IoIosArrowRoundBack } from "react-icons/io";
 import './style.css'
 import ShowPost from './showPost';
+import { useNavigate } from "react-router";
+import { StoreContext } from '@/context/StoreProvider';
+function SliderCommon({ isPost, dataPost }) {
 
-function SliderCommon({ data, isPost, dataPost }) {
+    const { data } = useContext(StoreContext)
+    const navigate = useNavigate();
+
     const CustomNextArrow = ({ onClick, isPost }) => {
         return (
             <IoIosArrowRoundForward
@@ -36,6 +41,10 @@ function SliderCommon({ data, isPost, dataPost }) {
         prevArrow: <CustomPrevArrow isPost={isPost} />
     };
 
+    const handleNavigateDetailProduct = (name) => {
+        const path = `/shop/${name.replace(/ /g, "-")}`;
+        navigate(path)
+    }
 
     return (
 
@@ -46,7 +55,7 @@ function SliderCommon({ data, isPost, dataPost }) {
                         <ShowPost rating={item.rating} name={item.name} country={item.country} post={item.post} />
                     ))
                     : data?.map((item, index) => (
-                        <div key={index}>
+                        <div key={index} onClick={() => handleNavigateDetailProduct(item.brandCar)}>
                             <ProductItem
                                 src={item.img}
                                 categoryCar={item.category}

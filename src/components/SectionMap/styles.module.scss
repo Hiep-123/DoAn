@@ -4,9 +4,10 @@
     justify-content: space-between;
     padding: 50px;
     background-color: #fff;
-    margin-top: 150px;
+    margin-top: 200px;
     position: relative;
     margin-bottom: 150px;
+
     .mapClass {
         width: 50%;
         background-image: url("https://xstore.8theme.com/elementor/demos/rental-car/wp-content/uploads/sites/81/2022/07/Image.jpeg"); // Đặt đường dẫn hình ảnh bản đồ phù hợp
@@ -20,6 +21,7 @@
             width: 15px;
             height: 15px;
             position: absolute;
+
             .Box1 {
                 margin-top: 5px;
                 width: 400px;
@@ -30,6 +32,7 @@
                 padding: 20px;
                 display: none;
                 transform: translateX(-45%);
+
                 h2 {
                     margin-top: 10px;
                 }

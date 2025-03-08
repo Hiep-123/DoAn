@@ -4,7 +4,6 @@ import ProductItem from '@components/ProductItem/ProductItem';
 
 function ListCar({ data }) {
   const { container } = styles
-  console.log(data)
   return (
     <div className={container}>
       {data?.map((item) => (

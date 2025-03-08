@@ -5,7 +5,6 @@ import styles from './styles.module.scss'
 import Section from '@components/Section/Section';
 import AdvanceHeadling from '@components/AdvanceHeadling/AdvanceHeadling';
 import ShowCar from '@components/ShowCar/ShowCar';
-import { StoreProvider } from '@/context/StoreProvider';
 import SectionRentalCar from '@components/SectionRentalCar/SectionRentalCar';
 import SectionDiscounts from '@components/SectionDiscounts/SectionDiscounts';
 import Populate from '@components/Populate/Populate';
@@ -17,7 +16,6 @@ function HomePage() {
     const { container } = styles;
     return (
         <div className={container}>
-            <StoreProvider>
                 <Header />
                 <Banner />
                 <Section />
@@ -29,7 +27,6 @@ function HomePage() {
                 <SectionMap />
                 <ArticleList />
                 <Footer />
-            </StoreProvider>
         </div>
     )
 }

@@ -14,12 +14,12 @@
         align-items: center;
         flex-direction: column;
         width: 1092px;
-
         .shop {
             font-size: 23px;
             color: white;
-            width: 15%;
+            width: 40%;
             text-align: center;
+            flex-wrap: wrap;
 
             p {
                 cursor: pointer;
@@ -62,5 +62,32 @@
             line-height: 30px;
             width: 700px;
         }
+    }
+}
+
+.shopDetail {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    gap: 10px;
+
+    div {
+        display: flex;
+        color: white;
+        align-items: center;
+        justify-content: center;
+        letter-spacing: 3px;
+
+        p {
+            font-size: 22px;
+        }
+    }
+
+    span {
+        text-align: center;
+        font-size: 25px;
+        color: white;
+        letter-spacing: 3px;
+
     }
 }

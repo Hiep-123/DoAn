@@ -11,8 +11,11 @@ export const StoreProvider = ({ children }) => {
 
     ]
 
+    // const [listCar, setListCar] = useState([])
+    // setListCar(data)
     const value = {
-        data
+        data,
+        // listCar
     }
     return (
         <StoreContext.Provider value={value}>
