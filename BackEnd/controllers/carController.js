@@ -1,27 +1,50 @@
-const { Car, BrandCar } = require("../model/model")
+const { Car } = require('../models/model');
 
-const carController = {
-    addCar: async (req, res) => {
-        try {
-            const newCar = new Car(req.body);
-            const saveCar = await newCar.save();
+exports.createCar = async (req, res) => {
+  try {
+    const car = new Car(req.body);
+    await car.save();
+    res.status(201).send(car);
+  } catch (error) {
+    res.status(400).send(error);
+  }
+};
 
-            res.status(200).json(saveCar);
+exports.getAllCars = async (req, res) => {
+  try {
+    const cars = await Car.find();
+    res.send(cars);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
 
-        } catch (error) {
-            res.status(500).json(error);
-        }
-    },
+exports.getCarById = async (req, res) => {
+  try {
+    const car = await Car.findById(req.params.id);
+    if (!car) return res.status(404).send('Car not found');
+    res.send(car);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
 
-    getCar: async (req, res) => {
-        try {
-            const getAllCar = await Car.find().populate('brandCars')
-            res.status(200).json(getAllCar)
-        } catch (err) {
-            res.status(500).json(err)
-        }
-    }
-}
+exports.updateCar = async (req, res) => {
+  try {
+    const car = await Car.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
+    if (!car) return res.status(404).send('Car not found');
+    res.send(car);
+  } catch (error) {
+    res.status(400).send(error);
+  }
+};
 
-
-module.exports = carController;
+exports.deleteCar = async (req, res) => {
+  try {
+    const car = await Car.findByIdAndDelete(req.params.id);
+    if (!car) return res.status(404).send('Car not found');
+    res.send(car);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
