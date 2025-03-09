@@ -1,26 +1,20 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
-//xe
+// Define your schemas and models here
+
+// Example schema and model
 const carSchema = new mongoose.Schema({
-    img: {
-        type: String
-    },
-    category: {
-        type: String
-    },
-    brandId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'BrandCar'
-    },
-    pricePerDay: {
-        type: Number
-    },
-    des: {
-        type: String
-    },
+  img: String,
+  category: String,
+  brandId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'BrandCar'
+  },
+  pricePerDay: Number,
+  des: String,
+}, { timestamps: true });
 
-}, [{ timestamps: true }])
-
+const Car = mongoose.model('Car', carSchema);
 //thuong hieu
 const brandCarShema = new mongoose.Schema({
     nameBrandCar: {
