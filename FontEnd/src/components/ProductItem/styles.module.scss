@@ -1,0 +1,43 @@
+.container {
+    margin-left: 1px;
+    border: 1px solid #dfdede;
+    padding: 30px 40px;
+    border-radius: 5px;
+    cursor: pointer;
+
+    .containerProduct {
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        .containerItem {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+
+            .category {
+                font-size: 19px;
+                color: #888;
+                font-weight: 500;
+                margin-bottom: 2px;
+
+            }
+
+            .title {
+                font-size: 20px;
+                color: #222;
+                margin-bottom: 5px;
+            }
+
+            .des {
+                margin-top: 10px;
+                font-size: 20px;
+                color: #888;
+                text-align: center;
+            }
+        }
+    }
+}

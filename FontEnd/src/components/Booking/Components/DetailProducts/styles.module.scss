@@ -1,0 +1,154 @@
+@import '@styles/main.module.scss';
+
+
+.container {
+
+    img {
+        width: 100%;
+        height: 100%;
+    }
+
+    .containerBoxLeft {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+
+        .boxLeft {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 70%;
+
+            .category {
+                font-size: 25px;
+                color: #797979;
+            }
+
+            .brandCar {
+                font-size: 40px;
+            }
+
+            .price {
+                color: #3C43ED;
+                font-size: 25px;
+                font-weight: normal;
+                line-height: 38px;
+
+            }
+
+            .boxIcon {
+                display: flex;
+                justify-content: space-between;
+                padding: 10px 0;
+                gap: 0px;
+                width: 100%;
+
+                .icon {
+                    width: calc(100% / 4);
+                    display: flex;
+                    align-items: center;
+                    gap: 5px; // Khoảng cách giữa icon và chữ
+                    font-size: 16px;
+                    color: #333;
+
+                    div {
+                        display: flex;
+                        gap: 20px;
+                        align-items: center;
+                        justify-content: center;
+
+                        img {
+                            width: 42px;
+                            height: 35px;
+                        }
+
+                        div {
+                            font-size: 20px;
+                        }
+                    }
+                }
+            }
+        }
+
+        .boxRight {}
+    }
+}
+
+.reviewForm {
+    width: 100%;
+    margin-top: 30px;
+
+    .title {
+        font-family: "Epilogue", Sans-serif;
+        font-size: 20px;
+        font-weight: 300;
+        margin-bottom: 20px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #e3e2e2;
+    }
+
+    .subtitle {
+        font-size: 22px;
+        color: #888;
+        margin-bottom: 30px;
+    }
+
+    .ratingSection {
+
+        label {
+            font-size: 22px;
+            color: #888;
+        }
+
+        .stars {
+            display: flex;
+            gap: 10px;
+            cursor: pointer;
+            color: #ccc;
+            margin: 20px 0;
+        }
+    }
+
+    .formGroup {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 10px;
+
+        label {
+            font-size: 20px;
+            color: #888;
+        }
+
+        textarea {
+            height: 200px;
+            font-size: 20px;
+            padding: 10px;
+            border-color: #e4e3e3;
+        }
+
+        input {
+            padding: 10px;
+            font-size: 20px;
+            height: 50px;
+        }
+
+        .required {
+            color: red;
+            font-size: 20px;
+        }
+    }
+}
+
+.active {
+    color: yellow;
+}
+
+.submitBtn {
+    width: 18%;
+    height: 40px;
+    background-color: #464cf4;
+    color: white;
+    font-size: 14px;
+    border-radius: 5px;
+}

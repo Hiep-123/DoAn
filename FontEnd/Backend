@@ -1,0 +1,47 @@
+use ThueXeDB;
+db.createCollection("NguoiDung");
+db.createCollection("Xe");
+db.createCollection("DatXe");
+db.createCollection("ThanhToan");
+db.createCollection("DanhGia");
+db.NguoiDung.insertOne({
+    HoTen: "Nguyen Van A",
+    Email: "nguyenvana@example.com",
+    MatKhau: "hashedpassword",
+    SoDienThoai: "0123456789",
+    DiaChi: "123 Đường ABC, Quận 1, TP.HCM",
+    NgayTao: new Date()
+});
+db.Xe.insertOne({
+    ThuongHieu: "Toyota",
+    MauXe: "Đỏ",
+    NamSanXuat: 2020,
+    GiaThueNgay: 500000,
+    TinhTrang: true,
+    AnhURL: "http://example.com/toyota.jpg",
+    MoTa: "Xe đời mới, tiết kiệm nhiên liệu"
+});
+db.DatXe.insertOne({
+    MaNguoiDung: ObjectId("MaNguoiDungID"),
+    MaXe: ObjectId("MaXeID"),
+    NgayBatDau: new Date("2023-10-01"),
+    NgayKetThuc: new Date("2023-10-05"),
+    TongTien: 2500000,
+    TrangThai: "ChoDuyet",
+    NgayTao: new Date()
+});
+db.ThanhToan.insertOne({
+    MaDatXe: ObjectId("MaDatXeID"),
+    MaNguoiDung: ObjectId("MaNguoiDungID"),
+    SoTien: 2500000,
+    PhuongThucThanhToan: "TheTinDung",
+    TrangThaiThanhToan: "ChoDuyet",
+    NgayGiaoDich: new Date()
+});
+db.DanhGia.insertOne({
+    MaNguoiDung: ObjectId("MaNguoiDungID"),
+    MaXe: ObjectId("MaXeID"),
+    DiemDanhGia: 5,
+    BinhLuan: "Xe rất tốt, thoải mái",
+    NgayTao: new Date()
+});

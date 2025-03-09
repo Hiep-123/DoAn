@@ -1,0 +1,93 @@
+.container {
+    background-image: url("https://xstore.8theme.com/elementor/demos/rental-car/wp-content/uploads/sites/81/2022/07/03_BANNER-min.jpeg");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+    .containerBanner {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 1092px;
+        .shop {
+            font-size: 23px;
+            color: white;
+            width: 40%;
+            text-align: center;
+            flex-wrap: wrap;
+
+            p {
+                cursor: pointer;
+
+                &:hover {
+                    color: #888;
+                }
+            }
+
+            span {
+                font-size: 48px;
+                font-weight: 700;
+            }
+        }
+
+        .text1 {
+            font-size: 22px;
+            font-weight: 700;
+            text-transform: uppercase;
+            line-height: 22px;
+            color: #ADF1D2;
+            letter-spacing: 3px;
+            margin-bottom: 5px;
+        }
+
+        .text2 {
+            font-size: 80px;
+            font-weight: 700;
+            color: #ffffff;
+            text-align: center;
+            width: 800px;
+        }
+
+        .text3 {
+            margin: 30px 40px 0;
+            font-size: 19px;
+            color: #ffffff;
+            text-align: center;
+            font-weight: 400;
+            line-height: 30px;
+            width: 700px;
+        }
+    }
+}
+
+.shopDetail {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    gap: 10px;
+
+    div {
+        display: flex;
+        color: white;
+        align-items: center;
+        justify-content: center;
+        letter-spacing: 3px;
+
+        p {
+            font-size: 22px;
+        }
+    }
+
+    span {
+        text-align: center;
+        font-size: 25px;
+        color: white;
+        letter-spacing: 3px;
+
+    }
+}

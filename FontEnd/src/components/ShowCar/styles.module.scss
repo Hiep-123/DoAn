@@ -1,0 +1,103 @@
+@import '@styles/main.module.scss';
+
+
+.container {
+    display: flex;
+    justify-content: flex-start;
+    gap: 20px;
+    flex-direction: column;
+    margin-top: 50px;
+
+    .title {
+        font-size: 22px;
+        font-weight: 700;
+        text-transform: uppercase;
+        line-height: 20px;
+        letter-spacing: 4px;
+        color: #3C43ED;
+    }
+
+    .des {
+        font-size: 22px;
+        color: #2F3238;
+        font-family: "Epilogue", Sans-serif;
+        font-size: 40px;
+        font-weight: 700;
+        line-height: 41px;
+
+        span {
+            color: #3C43ED;
+        }
+    }
+
+    .subDes {
+        color: #888888;
+        font-size: 22px;
+        font-weight: 400;
+        line-height: 28px;
+        margin-bottom: 30px;
+    }
+}
+
+.boxIcon {
+    margin: 80px 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 40px;
+    .icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+    }
+
+}
+
+.lineLeft {
+    position: absolute;
+    left: 0;
+    width: 20%;
+    height: 3px;
+    background-color: #e8e8e8;
+    margin-top: 110px;
+
+    &::before,
+    &::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        width: 100px; // Độ dài của thanh
+        height: 2px; // Độ dày của thanh
+        background-color: #e7e7e7; // Màu của thanh
+    }
+
+    &::before {
+        left: 405px;
+        transform: translateY(-50%) rotate(-250deg);
+    }
+}
+
+.lineRight {
+    position: absolute;
+    right: 0;
+    width: 20%;
+    height: 3px;
+    background-color: #e8e8e8;
+    margin-top: -110px;
+
+    &::before,
+    &::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        width: 100px; // Độ dài của thanh
+        height: 2px; // Độ dày của thanh
+        background-color: #e7e7e7; // Màu của thanh
+    }
+
+    &::before {
+        right: 405px;
+        transform: translateY(-50%) rotate(-250deg);
+    }
+}

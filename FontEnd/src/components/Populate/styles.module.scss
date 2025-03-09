@@ -1,0 +1,92 @@
+.container {
+    background-image: url('https://xstore.8theme.com/elementor/demos/rental-car/wp-content/uploads/sites/81/2022/07/Image-2.jpeg');
+    background-position: bottom right;
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin-top: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    position: relative;
+
+    .containerBox1 {
+        display: flex;
+        justify-content: space-between;
+        gap: 30px;
+        flex-direction: column;
+        padding-top: 50px;
+        width: 30%;
+
+        .title {
+            padding-left: 10px;
+            font-size: 28px;
+            color: #3C43ED;
+            font-weight: 600;
+        }
+
+        .des {
+            padding-left: 10px;
+            width: 700px;
+            color: #2F3238;
+            font-family: "Epilogue", Sans-serif;
+            font-size: 40px;
+            font-weight: 700;
+        }
+    }
+
+    .containerBox2 {
+        margin-left: 40px;
+        display: flex;
+        justify-content: flex-start;
+
+        img {
+            transform: translateX(100px) translateY(-50px);
+        }
+    }
+
+    .downloadApp {
+        background-color: #baf7d5;
+        text-align: center;
+        padding: 20px;
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 260px;
+        position: absolute;
+        right: 0;
+        left: 0;
+        bottom: -130px;
+        height: 200px;
+        .dowloadBox {
+            width: 650px;
+            height: 105px;
+            display: flex;
+            justify-content: flex-start;
+            flex-direction: column;
+            align-items: flex-start;
+
+            h2 {
+                font-family: "Epilogue", Sans-serif;
+                font-size: 35px;
+                font-weight: 700;
+                line-height: 1.4em;
+                color: #2F3238;
+            }
+
+            p {
+                font-size: 17px;
+                font-weight: 400;
+                height: 28px;
+                line-height: 28px;
+            }
+        }
+
+        .downloadButtons {
+            display: flex;
+            justify-content: space-around;
+            gap: 15px;
+
+        }
+    }
+}

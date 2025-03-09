@@ -1,0 +1,63 @@
+.slick-slider .slick-arrow {
+    color: #333;
+    width: 55px;
+    height: 55px;
+    opacity: 1;
+    transition: all 0.5s ease;
+}
+
+svg.slick-arrow.slick-next {
+    border-radius: 50%;
+    border: 1px solid #e7e7e7;
+}
+
+svg.slick-arrow:hover.slick-next {
+    background-color: rgb(94, 94, 253);
+    color: white;
+    transition: all 0.3s ease-in-out;
+}
+
+svg.slick-arrow.slick-prev {
+    border-radius: 50%;
+    border: 1px solid #e7e7e7;
+}
+
+svg.slick-arrow:hover.slick-prev {
+    background-color: rgb(94, 94, 253);
+    color: white;
+    transition: all 0.3s ease-in-out;
+}
+
+.slick-next {
+    opacity: 0;
+    right: 20px;
+    z-index: 9999;
+}
+
+.slick-prev {
+    opacity: 0;
+    left: 10px;
+    z-index: 9999;
+}
+
+/* Mũi tên cho testimonial slider (ảnh 2) */
+.testimonial-slider .slick-next {
+    top: 300px;
+    opacity: 1;
+    right: 50%;
+    bottom: -40px;
+    transform: translateX(125%);
+}
+
+.testimonial-slider .slick-prev {
+    opacity: 1;
+    top: 300px;
+    left: 50%;
+    bottom: -40px;
+    transform: translateX(-125%);
+}
+
+.containerPost {
+    display: flex;
+    flex-direction: column;
+}
