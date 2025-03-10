@@ -14,56 +14,51 @@
         align-items: center;
         flex-direction: column;
         width: 1092px;
-        .shop {
-            font-size: 23px;
-            color: white;
-            width: 40%;
-            text-align: center;
-            flex-wrap: wrap;
 
-            p {
-                cursor: pointer;
 
-                &:hover {
-                    color: #888;
-                }
-            }
+        p {
+            cursor: pointer;
 
-            span {
-                font-size: 48px;
-                font-weight: 700;
+            &:hover {
+                color: #888;
             }
         }
 
-        .text1 {
-            font-size: 22px;
+        span {
+            font-size: 48px;
             font-weight: 700;
-            text-transform: uppercase;
-            line-height: 22px;
-            color: #ADF1D2;
-            letter-spacing: 3px;
-            margin-bottom: 5px;
-        }
-
-        .text2 {
-            font-size: 80px;
-            font-weight: 700;
-            color: #ffffff;
-            text-align: center;
-            width: 800px;
-        }
-
-        .text3 {
-            margin: 30px 40px 0;
-            font-size: 19px;
-            color: #ffffff;
-            text-align: center;
-            font-weight: 400;
-            line-height: 30px;
-            width: 700px;
         }
     }
+
+    .text1 {
+        font-size: 22px;
+        font-weight: 700;
+        text-transform: uppercase;
+        line-height: 22px;
+        color: #ADF1D2;
+        letter-spacing: 3px;
+        margin-bottom: 5px;
+    }
+
+    .text2 {
+        font-size: 80px;
+        font-weight: 700;
+        color: #ffffff;
+        text-align: center;
+        width: 800px;
+    }
+
+    .text3 {
+        margin: 30px 40px 0;
+        font-size: 19px;
+        color: #ffffff;
+        text-align: center;
+        font-weight: 400;
+        line-height: 30px;
+        width: 700px;
+    }
 }
+
 
 .shopDetail {
     display: flex;
@@ -90,4 +85,13 @@
         letter-spacing: 3px;
 
     }
+}
+
+.shop {
+    font-size: 23px;
+    color: white;
+    width: 40%;
+    text-align: center;
+    flex-wrap: wrap;
+    margin: auto;
 }

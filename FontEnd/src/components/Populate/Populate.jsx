@@ -2,7 +2,6 @@ import React from 'react'
 import styles from './styles.module.scss'
 import SliderCommon from '@components/SliderCommon/SliderCommon';
 import useTranslateXImage from '@/hooks/translateXImage';
-import { GoStarFill } from 'react-icons/go';
 
 function Populate() {
     const { container, containerBox1, containerBox2, title, des, img, downloadApp, dowloadBox, downloadButtons } = styles

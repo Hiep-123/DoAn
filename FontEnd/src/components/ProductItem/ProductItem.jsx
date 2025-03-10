@@ -8,8 +8,8 @@ function ProductItem({ src, categoryCar, brandCar, price, description }) {
 
     const location = useLocation();
 
-    const width = location.pathname === '/shop' ? '402px' : '410px'
-    const height = location.pathname === '/shop' ? '420px' : '420px'
+    const width = location.pathname === '/shop' ? '319px' : '410px'
+    const height = location.pathname === '/shop' ? '380px' : '420px'
 
 
     const renderStar = (length) => {
@@ -34,15 +34,15 @@ function ProductItem({ src, categoryCar, brandCar, price, description }) {
                 <div className={containerItem}>
                     <img src={src} alt=""
                         width={230} height={130} />
-                    <span className={category}>{categoryCar}</span>
-                    <div className={title}>{brandCar}</div>
+                    <span className={category}>{brandCar}</span>
+                    <div className={title}>{categoryCar}</div>
                     <div style={{ marginTop: '5px' }}>{renderStar(5)}</div>
                     <div style={{
                         marginTop: '5px',
                         fontSize: '20px',
                         color: '#888',
                         fontWeight: '500'
-                    }}>${price}</div>
+                    }}>${price}.00</div>
                     <div className={des}>
                         {description}
                     </div>

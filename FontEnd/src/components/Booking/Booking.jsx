@@ -4,18 +4,20 @@ import Footer from '@components/Footer/Footer';
 import Banner from '@components/Banner/Banner'
 import MainLayout from '@components/Layout/Layout';
 import Filter from './Components/Filter';
-import ListCar from './Components/listCar';
+import ListCar from './Components/ListCar';
+import { StoreContext } from '@/context/StoreProvider';
 import { BookingContext } from '@/context/BookingProvider';
 
 function Booking() {
-    const { dataListCar } = useContext(BookingContext)
+    const { listCar, isLoading } = useContext(StoreContext)
+    const { dataListSortCar } = useContext(BookingContext)
     return (
         <div>
             <Header />
             <Banner />
             <MainLayout>
                 <Filter />
-                <ListCar data={dataListCar} />
+                <ListCar data={dataListSortCar} isLoading={isLoading} />
             </MainLayout>
             <Footer />
         </div>

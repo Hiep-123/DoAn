@@ -1,16 +1,17 @@
-import React, { useContext } from 'react'
+import React, { useContext } from 'react';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import ProductItem from '@components/ProductItem/ProductItem';
 import { IoIosArrowRoundForward, IoIosArrowRoundBack } from "react-icons/io";
-import './style.css'
+import './style.css';
 import ShowPost from './showPost';
 import { useNavigate } from "react-router";
 import { StoreContext } from '@/context/StoreProvider';
-function SliderCommon({ isPost, dataPost }) {
+import Loading from '@components/Loading/Loading';
 
-    const { data } = useContext(StoreContext)
+function SliderCommon({ isPost, dataPost, isLoading }) {
+    const { listCar } = useContext(StoreContext);
     const navigate = useNavigate();
 
     const CustomNextArrow = ({ onClick, isPost }) => {
@@ -22,7 +23,6 @@ function SliderCommon({ isPost, dataPost }) {
         );
     };
 
-    // Mũi tên prev
     const CustomPrevArrow = ({ onClick, isPost }) => {
         return (
             <IoIosArrowRoundBack
@@ -31,7 +31,8 @@ function SliderCommon({ isPost, dataPost }) {
             />
         );
     };
-    var settings = {
+
+    const settings = {
         dots: false,
         infinite: true,
         speed: 500,
@@ -43,32 +44,44 @@ function SliderCommon({ isPost, dataPost }) {
 
     const handleNavigateDetailProduct = (name) => {
         const path = `/shop/${name.replace(/ /g, "-")}`;
-        navigate(path)
-    }
+        navigate(path);
+    };
 
     return (
-
-        <div className={isPost ? "testimonial-slider" : ''}>
-            <Slider {...settings}>
-                {isPost
-                    ? dataPost?.map((item) => (
-                        <ShowPost rating={item.rating} name={item.name} country={item.country} post={item.post} />
-                    ))
-                    : data?.map((item, index) => (
-                        <div key={index} onClick={() => handleNavigateDetailProduct(item.brandCar)}>
-                            <ProductItem
-                                src={item.img}
-                                categoryCar={item.category}
-                                brandCar={item.brandCar}
-                                price={item.price}
-                                description={item.des}
-                            />
-                        </div>
-                    ))}
-            </Slider>
-
-        </div>
-    )
+        <>
+            {isLoading ? (
+                <div className="overlayLoading">  {/* 👉 Sửa thành chuỗi nếu là className */}
+                    <Loading />
+                </div>
+            ) : (
+                <div className={isPost ? "testimonial-slider" : ''}>
+                    <Slider {...settings}>
+                        {isPost
+                            ? dataPost?.map((item, index) => (
+                                <ShowPost
+                                    key={index}  // 👉 Thêm key vào đây
+                                    rating={item.rating}
+                                    name={item.name}
+                                    country={item.country}
+                                    post={item.post}
+                                />
+                            ))
+                            : listCar?.map((item, index) => (
+                                <div key={index} onClick={() => handleNavigateDetailProduct(item.category)}>
+                                    <ProductItem
+                                        src={item.img}
+                                        categoryCar={item.category}
+                                        brandCar={item.brandId.nameBrandCar}
+                                        price={item.pricePerDay}
+                                        description={item.des}
+                                    />
+                                </div>
+                            ))}
+                    </Slider>
+                </div>
+            )}
+        </>
+    );
 }
 
-export default SliderCommon
+export default SliderCommon;

@@ -34,8 +34,11 @@ function Banner() {
                     ) : (
                         // Nếu ở trang chi tiết sản phẩm /shop/...
                         <div className={shopDetail}>
-                            <div>
-                                <p onClick={() => navigate('/')}>Home {'>'}</p>
+                            <div className={shop}>
+                                <p  style={{
+                                    cursor:'pointer'
+                                }} 
+                                onClick={() => navigate('/')}>Home {'>'}</p>
                                 <p style={{
                                     marginLeft:'5px'
                                 }}> SHOP</p>

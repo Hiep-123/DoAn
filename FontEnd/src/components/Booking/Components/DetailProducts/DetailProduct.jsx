@@ -4,17 +4,18 @@ import Header from '@components/Header/Header'
 import { StoreContext } from '@/context/StoreProvider';
 import ShowInfoCar from './ShowInfoCar';
 import MainLayout from '@components/Layout/Layout';
+import Footer from '@components/Footer/Footer';
 
 function DetailProduct() {
-    const { data } = useContext(StoreContext)
-
+    const { listCar } = useContext(StoreContext)
     return (
         <>
             <Header />
             <Banner />
             <MainLayout>
-                <ShowInfoCar />
+                <ShowInfoCar data={listCar} />
             </MainLayout>
+            <Footer />
         </>
     )
 }

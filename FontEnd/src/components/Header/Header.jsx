@@ -28,8 +28,8 @@ function Header() {
                         </div>
                     </div>
                     <div className={containerMenu}>
-                        {dataMenu.slice(0, 4).map((item) => {
-                            return <Menu content={item.content} />
+                        {dataMenu.slice(0, 4).map((item, index) => {
+                            return <Menu content={item.content} key={index} />
                         })}
                     </div>
                 </div>

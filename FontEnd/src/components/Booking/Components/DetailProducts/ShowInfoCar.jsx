@@ -1,4 +1,3 @@
-import React, { useContext } from 'react'
 import styles from './styles.module.scss'
 import ReviewForm from './ReviewForm';
 
@@ -6,9 +5,9 @@ function ShowInfoCar() {
     const { container, containerBoxLeft, boxLeft, category, brandCar, price,
         boxIcon, icon, boxRight
     } = styles
-
+    
     return (
-        <div className={container}>
+        <div className={container} >
             <img src='https://xstore.b-cdn.net/elementor/demos/rental-car/wp-content/uploads/sites/81/2022/07/Image_7-1.jpg' alt="" />
             <div className={containerBoxLeft}>
                 <div className={boxLeft}>

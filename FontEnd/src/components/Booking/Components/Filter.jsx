@@ -20,6 +20,8 @@ function Filter() {
         setIsShowGrid(type === 'grid')
     }
 
+    
+
     return (
         <div className={containerFilter}>
             <div className={boxLeft}>

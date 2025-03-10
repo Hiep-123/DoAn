@@ -4,28 +4,22 @@ const mongoose = require('mongoose');
 
 // Example schema and model
 const carSchema = new mongoose.Schema({
-  img: String,
-  category: String,
-  brandId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'BrandCar'
-  },
-  pricePerDay: Number,
-  des: String,
+    img: String,
+    category: String,
+    brandId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'BrandCar'
+    },
+    pricePerDay: Number,
+    des: String,
 }, { timestamps: true });
 
-const Car = mongoose.model('Car', carSchema);
 //thuong hieu
 const brandCarShema = new mongoose.Schema({
     nameBrandCar: {
         type: String
     },
-    cars: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Car'
-        }
-    ]
+   
 })
 
 //dat xe
@@ -33,6 +27,16 @@ const bookingSchema = new mongoose.Schema({
     userID: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
+    },
+    carId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Car'
+    },
+    totalAmount: Number,
+    status: {
+        type: String,
+        enum: ['pending', 'approved', 'cancelled'],
+        default: 'pending'
     },
 
 }, [{ timestamps: true }])

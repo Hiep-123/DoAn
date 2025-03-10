@@ -7,7 +7,7 @@ import { StoreContext } from '@/context/StoreProvider';
 
 function ShowCar() {
     const { container, title, des, subDes, boxIcon, icon, lineRight, lineLeft } = styles
-    const { data } = useContext(StoreContext)
+    const { data, isLoading } = useContext(StoreContext)
 
 
     return (
@@ -23,7 +23,7 @@ function ShowCar() {
                     From compact 3-door cars to spacious SUVs and vans, we have everything you need
                 </div>
                 <div>
-                    <SliderCommon data={data} />
+                    <SliderCommon data={data} isLoading={isLoading} />
                 </div>
             </div>
             <div className={lineLeft} />

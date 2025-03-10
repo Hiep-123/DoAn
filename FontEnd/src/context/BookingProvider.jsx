@@ -1,13 +1,13 @@
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
+import { getCar } from '../apis/carService';
+
 export const BookingContext = createContext();
+
 export const BookingProvider = ({ children }) => {
     const sortOptions = [
         { label: 'Default sorting', value: '0' },
-        { label: 'Sort by popularity', value: '1' },
-        { label: 'Sort by average rating', value: '2' },
-        { label: 'Sort by latest', value: '3' },
-        { label: 'Sort by price: low to high', value: '4' },
-        { label: 'Sort by price: high to low', value: '5' }
+        { label: 'Sort by price: low to high', value: '1' },
+        { label: 'Sort by price: high to low', value: '2' }
     ];
 
     const showOptions = [
@@ -16,24 +16,33 @@ export const BookingProvider = ({ children }) => {
         { label: 'All', value: 'all' }
     ];
 
-    const dataListCar = [
-        { img: 'https://xstore.b-cdn.net/elementor/demos/rental-car/wp-content/uploads/sites/81/2022/07/Image_5-1-600x316.jpg', category: 'Convertible', brandCar: 'Aston Martin DB9', price: '24.00', des: 'Hendrerit vivamus justo maecenas senectus aliquam.' },
-        { img: 'https://xstore.b-cdn.net/elementor/demos/rental-car/wp-content/uploads/sites/81/2022/07/Image_5-1-600x316.jpg', category: 'Convertible', brandCar: 'Aston Martin DB9', price: '24.00', des: 'Hendrerit vivamus justo maecenas senectus aliquam.' },
-        { img: 'https://xstore.b-cdn.net/elementor/demos/rental-car/wp-content/uploads/sites/81/2022/07/Image_5-1-600x316.jpg', category: 'Convertible', brandCar: 'Aston Martin DB9', price: '24.00', des: 'Hendrerit vivamus justo maecenas senectus aliquam.' },
-        { img: 'https://xstore.b-cdn.net/elementor/demos/rental-car/wp-content/uploads/sites/81/2022/07/Image_5-1-600x316.jpg', category: 'Convertible', brandCar: 'Aston Martin DB9', price: '24.00', des: 'Hendrerit vivamus justo maecenas senectus aliquam.' },
-        { img: 'https://xstore.b-cdn.net/elementor/demos/rental-car/wp-content/uploads/sites/81/2022/07/Image_5-1-600x316.jpg', category: 'Convertible', brandCar: 'Aston Martin DB9', price: '24.00', des: 'Hendrerit vivamus justo maecenas senectus aliquam.' },
-        { img: 'https://xstore.b-cdn.net/elementor/demos/rental-car/wp-content/uploads/sites/81/2022/07/Image_5-1-600x316.jpg', category: 'Convertible', brandCar: 'Aston Martin DB9', price: '24.00', des: 'Hendrerit vivamus justo maecenas senectus aliquam.' },
-        { img: 'https://xstore.b-cdn.net/elementor/demos/rental-car/wp-content/uploads/sites/81/2022/07/Image_5-1-600x316.jpg', category: 'Convertible', brandCar: 'Aston Martin DB9', price: '24.00', des: 'Hendrerit vivamus justo maecenas senectus aliquam.' },
-        { img: 'https://xstore.b-cdn.net/elementor/demos/rental-car/wp-content/uploads/sites/81/2022/07/Image_5-1-600x316.jpg', category: 'Convertible', brandCar: 'Aston Martin DB9', price: '24.00', des: 'Hendrerit vivamus justo maecenas senectus aliquam.' },
-        { img: 'https://xstore.b-cdn.net/elementor/demos/rental-car/wp-content/uploads/sites/81/2022/07/Image_5-1-600x316.jpg', category: 'Convertible', brandCar: 'Aston Martin DB9', price: '24.00', des: 'Hendrerit vivamus justo maecenas senectus aliquam.' },
-        { img: 'https://xstore.b-cdn.net/elementor/demos/rental-car/wp-content/uploads/sites/81/2022/07/Image_5-1-600x316.jpg', category: 'Convertible', brandCar: 'Aston Martin DB9', price: '24.00', des: 'Hendrerit vivamus justo maecenas senectus aliquam.' },
-    ]
-
-
-    const [sortId, setSortId] = useState('0');
+    // 🟢 State quản lý dữ liệu và trạng thái
+    const [sortId, setSortId] = useState('0');          // Mặc định là '0' (Default sorting)
     const [showId, setShowId] = useState('8');
     const [isShowGrid, setIsShowGrid] = useState(true);
     const [isLoading, setIsLoading] = useState(false);
+    const [dataListSortCar, setDataListSortCar] = useState([]);
+
+    // 🟢 Hàm gọi API lấy dữ liệu xe
+    const handleLoadCar = async () => {
+        setIsLoading(true);
+        const query = {
+            sortId,
+            showId
+        }
+        try {
+            const res = await getCar(query);
+            setDataListSortCar(res || []);
+        } catch (err) {
+            console.error("🔥 Lỗi khi gọi API:", err.response?.data || err.message);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        handleLoadCar();
+    }, [sortId, showId]);  // Theo dõi sortId
 
     const value = {
         sortOptions,
@@ -45,12 +54,14 @@ export const BookingProvider = ({ children }) => {
         isLoading,
         sortId,
         showId,
-        dataListCar
-    }
+        handleLoadCar,
+        dataListSortCar
+    };
+
+
     return (
         <BookingContext.Provider value={value}>
             {children}
         </BookingContext.Provider>
-    )
-}
-
+    );
+};
