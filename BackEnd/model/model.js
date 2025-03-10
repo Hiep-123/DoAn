@@ -90,7 +90,7 @@ const paymentScheme = new mongoose.Schema({
     },
     paythod: {
         type: String,
-        enum: ['credit_card', 'paypal', 'cash']
+        enum: ['credit_card', 'paypal', 'cash', 'bank_transfer', 'crypto']
     },
     paymentStatus: {
         type: String,
@@ -101,8 +101,7 @@ const paymentScheme = new mongoose.Schema({
         type: Date,
         default: Date.now
     }
-}, [{ timestamps: true }])
-
+}, [{ timestamps: true }]);
 
 //chi tiet thanh toan
 const detailPayment = new mongoose.Schema({
