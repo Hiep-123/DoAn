@@ -7,7 +7,8 @@ const morgan = require('morgan')
 const dotenv = require('dotenv')
 const carRouter = require('./routes/car')
 const brandCarRouter = require('./routes/brandCar')
-
+const bookingRouter = require('./booking');
+app.use('/api/bookings', bookingRouter);
 dotenv.config()
 
 app.use(bodyParser.json({ limit: '50mb' }));
