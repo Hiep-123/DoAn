@@ -9,6 +9,8 @@ const carRouter = require('./routes/car')
 const brandCarRouter = require('./routes/brandCar')
 const bookingRouter = require('./booking');
 app.use('/api/bookings', bookingRouter);
+const paymentRouter = require('./payment');
+app.use('/api/payments', paymentRouter);
 dotenv.config()
 
 app.use(bodyParser.json({ limit: '50mb' }));
