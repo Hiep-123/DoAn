@@ -12,7 +12,7 @@ function Booking() {
     const { listCar, isLoading } = useContext(StoreContext)
     const { dataListSortCar } = useContext(BookingContext)
     return (
-        <div>
+        <div >
             <Header />
             <Banner />
             <MainLayout>

@@ -22,7 +22,6 @@ export const BookingProvider = ({ children }) => {
     const [isShowGrid, setIsShowGrid] = useState(true);
     const [isLoading, setIsLoading] = useState(false);
     const [dataListSortCar, setDataListSortCar] = useState([]);
-
     // 🟢 Hàm gọi API lấy dữ liệu xe
     const handleLoadCar = async () => {
         setIsLoading(true);

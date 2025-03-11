@@ -42,3 +42,11 @@
     gap: 20px;
     margin-bottom: 200px;
 }
+
+.containerList {
+    flex-direction: column;
+}
+
+.active{
+    color: rgb(32, 69, 255);
+}

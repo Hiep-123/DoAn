@@ -5,6 +5,7 @@
     border-radius: 5px;
     cursor: pointer;
     width: 100%;
+
     .containerProduct {
 
         display: flex;
@@ -40,4 +41,52 @@
             }
         }
     }
+}
+
+.containerList {
+    width: 100%;
+    border: 1px solid #dddddd;
+
+    .containerListProduct {
+        display: flex;
+        width: 100%;
+
+        height: 100%;
+    }
+}
+
+.girdItem {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+}
+
+.box1 {
+    width: 40%;
+    img {
+        width: 400px;
+        height: 250px;
+    }
+}
+
+.listProduct {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    gap: 20px;
+    margin: auto 0;
+    padding: 30px 40px;
+}
+
+.box2{
+    height: 70%;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    margin: auto 0;
+    font-size: 23px;
+    gap: 10px;
 }

@@ -33,7 +33,10 @@ function Header() {
                         })}
                     </div>
                 </div>
-                <div style={{ padding: '0 15px' }}>
+                <div style={{ padding: '0 15px' ,
+                    cursor:'pointer'
+                }}
+                    onClick={() => handleNavigateHome()}>
                     <img src="https://xstore.b-cdn.net/elementor/demos/rental-car/wp-content/uploads/sites/81/2022/07/Logo.png" alt="logo" />
                 </div>
                 <div className={containerBox}>

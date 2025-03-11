@@ -41,9 +41,10 @@ function SectionRentalCar() {
                             </div>
                             <p style={{ paddingTop: '10px' }}>Business Awards</p>
                         </div>
+                        
                     </div>
-
-                    <Button content={'More About Us'} />
+                        <Button content={'More About Us'}/>
+                    
                 </div>
                 <div className={containerBoxRight}>
                     <img src="https://xstore.8theme.com/elementor/demos/rental-car/wp-content/uploads/sites/81/2022/07/new-Image-min.jpeg" alt=""

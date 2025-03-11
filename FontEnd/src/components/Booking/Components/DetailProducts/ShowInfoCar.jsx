@@ -1,11 +1,11 @@
 import styles from './styles.module.scss'
 import ReviewForm from './ReviewForm';
-
+import Button from '@components/Button/Button'
 function ShowInfoCar() {
     const { container, containerBoxLeft, boxLeft, category, brandCar, price,
-        boxIcon, icon, boxRight
+        boxIcon, icon, boxRight, containerForm, boxInput
     } = styles
-    
+
     return (
         <div className={container} >
             <img src='https://xstore.b-cdn.net/elementor/demos/rental-car/wp-content/uploads/sites/81/2022/07/Image_7-1.jpg' alt="" />
@@ -71,7 +71,45 @@ function ShowInfoCar() {
                 </div>
 
                 <div className={boxRight}>
-                    form
+                    <div className={containerForm}>
+                        <div className={boxInput}>
+                            <span>Full Name</span>
+                            <input type="text" />
+                        </div>
+                        <div className={boxInput}>
+                            <span>Phone Number</span>
+                            <input type="text" />
+                        </div>
+                        <div className={boxInput}>
+                            <span>Your Email</span>
+                            <input type="text" />
+                        </div>
+                        <div className={boxInput}>
+                            <span>Pickup Address</span>
+                            <input type="text" />
+                        </div>
+                        <div className={boxInput}>
+                            <span>Pickup Date</span>
+                            <input type="date" />
+                        </div>
+                        <div className={boxInput}>
+                            <span>Pickup Time</span>
+                            <input type="text" />
+                        </div>
+                        <div className={boxInput}>
+                            <span>Drop Off Address</span>
+                            <input type="text" />
+                        </div>
+                        <div className={boxInput}>
+                            <span>Drop Off Date</span>
+                            <input type="date" />
+                        </div>
+                        <div className={boxInput}>
+                            <span>Drop Off Time</span>
+                            <input type="text" />
+                        </div>
+                        <Button content={'Request For Booking'} isPrimary={true}/>
+                    </div>
                 </div>
             </div>
 

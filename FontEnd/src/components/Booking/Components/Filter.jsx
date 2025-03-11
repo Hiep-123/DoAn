@@ -6,7 +6,7 @@ import SelectBox from './SelectBox';
 import { BookingContext } from '@/context/BookingProvider';
 function Filter() {
     const { containerFilter, boxLeft, boxRight, boxIcon } = styles
-    const { sortOptions, showOptions, setSortId, setShowId, setIsShowGrid } = useContext(BookingContext);
+    const { sortOptions, showOptions, setSortId, setShowId, setIsShowGrid, isShowGrid } = useContext(BookingContext);
 
     const handleGetValue = (value, type) => {
         if (type === 'sort') {
@@ -20,7 +20,6 @@ function Filter() {
         setIsShowGrid(type === 'grid')
     }
 
-    
 
     return (
         <div className={containerFilter}>
@@ -31,13 +30,14 @@ function Filter() {
                 />
                 <div className={boxIcon}>
                     <TfiLayoutGrid4 size={'25px'} style={{ cursor: 'pointer' }}
-                        onClick={() => handleShowGrid('grid')} />
+                        onClick={() => handleShowGrid('grid')}
+                        color={isShowGrid ?'rgb(32, 69, 255)':''} />
                     <div style={{
                         height: '25px',
                         width: '1px',
                         backgroundColor: '#e1e1e1'
                     }} />
-                    <CiCircleList size={'28px'} color={'#222'} style={{ cursor: 'pointer' }}
+                    <CiCircleList size={'29px'} color={!isShowGrid ? 'rgb(26, 64, 255)' : '#222'} style={{ cursor: 'pointer' }}
                         onClick={() => handleShowGrid('list')} />
                 </div>
             </div>
