@@ -8,6 +8,7 @@ function Menu({ content }) {
         return content
     }
 
+
     const handleHighLight = (content) => {
         if (content === 'Rent A Car' && location.pathname === '/shop') {
             return 'rgb(31, 244, 215)'

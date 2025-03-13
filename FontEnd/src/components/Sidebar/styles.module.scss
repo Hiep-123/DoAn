@@ -1,0 +1,175 @@
+.container {
+    position: relative;
+
+    .overlay {
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        background-color: #0000004d;
+        z-index: 1000;
+        transition: all 0.3s ease;
+    }
+
+    .sideBar {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 450px;
+        background-color: #fff;
+        z-index: 1001;
+        height: 100vh;
+        transform: translateX(450px);
+        transition: all 0.3s ease;
+    }
+
+    .slideSideBar {
+        transform: translateX(0);
+    }
+
+    .boxIcon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 25px;
+        left: -60px;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        background-color: #fff;
+        transition: all 0.3s ease;
+        cursor: pointer;
+
+        &:hover {
+            background-color: #e1e1e1;
+        }
+    }
+}
+
+.containerLogin {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 30px;
+    justify-content: center;
+    align-items: center;
+
+    .containerBox {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 30px;
+
+        span {
+            font-size: 20px;
+        }
+    }
+
+    .containerBox2 {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+
+        .box1 {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            font-size: 20px;
+            text-align: center;
+
+            div {
+                padding: 10px;
+                width: 50%;
+                position: relative;
+                transition: color 0.3s ease-in-out;
+            }
+
+            .active {
+                color: black;
+                font-weight: bold;
+
+                &::after {
+                    content: "";
+                    position: absolute;
+                    left: 0;
+                    bottom: -5px;
+                    width: 100%;
+                    height: 4px;
+                    background-color: black;
+                    animation: border-slide 0.3s ease-in-out;
+                }
+            }
+
+
+        }
+    }
+}
+
+@keyframes border-slide {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 100%;
+    }
+}
+
+.containerBox3 {
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+    .box2 {
+        font-size: 25px;
+        margin-bottom: 20px;
+
+        input {
+            margin-top: 10px;
+            height: 50px;
+            width: 100%;
+            border: 1px solid #c7c7c7;
+            padding: 20px;
+            font-size: 20px;
+
+            &:focus {
+                outline: none;
+            }
+        }
+
+        .input {
+            position: relative;
+            margin-bottom: 30px;
+
+            div {
+                top: 20px;
+                right: 10px;
+                bottom: 0;
+                position: absolute
+            }
+        }
+
+    }
+}
+
+.containerBox4 {
+    display: flex;
+    justify-content: space-between;
+
+    .box3 {
+        font-size: 21px;
+        display: flex;
+        gap: 10px;
+        flex-grow: 1;
+
+        input {
+            width: 7%;
+        }
+    }
+}

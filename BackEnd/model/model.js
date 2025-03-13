@@ -19,12 +19,12 @@ const brandCarShema = new mongoose.Schema({
     nameBrandCar: {
         type: String
     },
-   
+
 })
 
 //dat xe
 const bookingSchema = new mongoose.Schema({
-    userID: {
+    userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
@@ -32,7 +32,6 @@ const bookingSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Car'
     },
-    totalAmount: Number,
     status: {
         type: String,
         enum: ['pending', 'approved', 'cancelled'],
@@ -60,7 +59,7 @@ const userSchema = new mongoose.Schema({
 
 //tai khoan
 const accountSchema = new mongoose.Schema({
-    user: {
+    userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
@@ -81,17 +80,15 @@ const accountSchema = new mongoose.Schema({
 
 //thanh toan
 const paymentScheme = new mongoose.Schema({
-    user: {
+    userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
     },
-    cars: {
+    bookingId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Car'
+        ref: 'Booking'
     },
-    amount: {
-        type: Number
-    },
+
     paythod: {
         type: String,
         enum: ['credit_card', 'paypal', 'cash', 'bank_transfer', 'crypto']
@@ -109,9 +106,13 @@ const paymentScheme = new mongoose.Schema({
 
 //chi tiet thanh toan
 const detailPayment = new mongoose.Schema({
-    cars: {
+    bookingId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Car'
+        ref: 'Booking'
+    },
+    paymentId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Payment'
     },
     amountCar: Number,
     totalAmount: {
@@ -121,11 +122,11 @@ const detailPayment = new mongoose.Schema({
 
 // danh gia
 const commentSchema = new mongoose.Schema({
-    cars: {
+    bookingId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Xe',
+        ref: 'Booking',
     },
-    userID: {
+    userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true

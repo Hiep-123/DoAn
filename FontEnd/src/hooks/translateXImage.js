@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 
 const useTranslateXImage = () => {
     const { scrollDriction, scrollPositon } = useScrollHandling();
-    const [translateXPosition, setTranslateXPosition] = useState(150); //khoi tao gia tri ban dau de di chuyen anh bang px
+    const [translateXPosition, setTranslateXPosition] = useState(120); //khoi tao gia tri ban dau de di chuyen anh bang px
 
 
     const handleTranslateX = () => {

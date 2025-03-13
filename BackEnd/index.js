@@ -10,6 +10,8 @@ const carRouter = require('./routes/car')
 const brandCarRouter = require('./routes/brandCar')
 const bookingRouter = require('./routes/booking');
 const paymentRouter = require('./routes/payment');
+const commentRouter = require('./routes/comment')
+
 dotenv.config()
 
 app.use(bodyParser.json({ limit: '50mb' }));
@@ -28,7 +30,7 @@ app.use('/api/car', carRouter)
 app.use('/api/brandCar', brandCarRouter)
 app.use('/api/bookings', bookingRouter);
 app.use('/api/payments', paymentRouter);
-
+app.use('/api/comment', commentRouter)
 
 app.listen(8080, () => {
     console.log("Server is running")

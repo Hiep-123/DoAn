@@ -66,7 +66,7 @@ function SliderCommon({ isPost, dataPost, isLoading }) {
                                     post={item.post}
                                 />
                             ))
-                            : listCar?.map((item, index) => (
+                            : listCar?.slice(0,4).map((item, index) => (
                                 <div key={index} onClick={() => handleNavigateDetailProduct(item.category)}>
                                     <ProductItem
                                         src={item.img}

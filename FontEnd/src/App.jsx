@@ -4,28 +4,33 @@ import routers from './routers/router'
 import { BookingProvider } from '@/context/BookingProvider';
 import { StoreProvider } from '@/context/StoreProvider'
 import { ToastProvider } from "@/context/ToastProvider";
+import { SideBarProvier } from '@/context/SideBarProvider';
+import SideBar from '@components/Sidebar/SideBar';
 
 function App() {
 
   return (
     <ToastProvider>
-      <StoreProvider>
-        <BookingProvider>
-          <BrowserRouter>
-            <Routes>
-              {routers.map((item, index) => {
-                return (
-                  <Route
-                    path={item.path}
-                    element={<item.component />}
-                    key={index}
-                  />
-                );
-              })}
-            </Routes>
-          </BrowserRouter>
-        </BookingProvider>
-      </StoreProvider>
+      <SideBarProvier>
+        <StoreProvider>
+          <BookingProvider>
+            <BrowserRouter>
+              <SideBar />
+                <Routes>
+                  {routers.map((item, index) => {
+                    return (
+                      <Route
+                        path={item.path}
+                        element={<item.component />}
+                        key={index}
+                      />
+                    );
+                  })}
+                </Routes>
+            </BrowserRouter>
+          </BookingProvider>
+        </StoreProvider>
+      </SideBarProvier>
     </ToastProvider>
   )
 }

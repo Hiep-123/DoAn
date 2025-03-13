@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styles from './styles.module.scss'
 import { dataMenu } from './constants'
 import { IoHomeOutline } from "react-icons/io5";
@@ -7,10 +7,13 @@ import { CiUser } from "react-icons/ci";
 import Button from '../Button/Button'
 import { useNavigate } from "react-router";
 import Menu from './Menu';
+import { SideBarContext } from '@/context/sideBarProvider';
 function Header() {
     const { container, containerHeader, containerBox, containerMenu,
         containerBoxIcon, menu
     } = styles;
+
+    const { setIsOpen, isOpen, setType } = useContext(SideBarContext);
     const navigate = useNavigate();
     const handleNavigateHome = () => {
         navigate('/')
@@ -29,12 +32,13 @@ function Header() {
                     </div>
                     <div className={containerMenu}>
                         {dataMenu.slice(0, 4).map((item, index) => {
-                            return <Menu content={item.content} key={index} />
+                            return <Menu content={item.content} key={index} setIsOpen={setIsOpen} />
                         })}
                     </div>
                 </div>
-                <div style={{ padding: '0 15px' ,
-                    cursor:'pointer'
+                <div style={{
+                    padding: '0 15px',
+                    cursor: 'pointer'
                 }}
                     onClick={() => handleNavigateHome()}>
                     <img src="https://xstore.b-cdn.net/elementor/demos/rental-car/wp-content/uploads/sites/81/2022/07/Logo.png" alt="logo" />
@@ -45,7 +49,8 @@ function Header() {
                             <CiSearch size={'20px'} />
                             Search
                         </div>
-                        <div className={menu} >
+                        <div className={menu}
+                            onClick={() => { setIsOpen(!isOpen); setType('login') }}>
                             <CiUser size={'25px'} />
                             Sign In
                         </div>
@@ -57,7 +62,7 @@ function Header() {
                 </div>
 
             </div>
-        </div>
+        </div >
     )
 }
 
