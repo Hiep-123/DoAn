@@ -5,9 +5,20 @@ export const SideBarContext = createContext();
 export const SideBarProvier = ({ children }) => {
     const [isOpen, setIsOpen] = useState();
     const [type, setType] = useState();
+    const [userId, setUserId] = useState();
+    const [userInfo, setUserInfo] = useState();
+    console.log(userInfo)
     const value = {
-        setIsOpen, type, setType, isOpen
+        setIsOpen,
+        type,
+        setType,
+        isOpen,
+        userId,
+        setUserId,
+        setUserInfo,
+        userInfo
     };
+
 
 
     return (

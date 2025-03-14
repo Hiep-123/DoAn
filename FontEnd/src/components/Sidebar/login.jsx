@@ -1,19 +1,72 @@
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { HiOutlineUser } from "react-icons/hi";
 import Button from '@components/Button/Button'
 import styles from './styles.module.scss'
 import { IoMdEyeOff } from "react-icons/io";
 import { IoMdEye } from "react-icons/io";
+import { ToastContext } from "@/context/ToastProvider";
+import { loginAuth, registerAuth } from '@/apis/authorService';
+import Cookies from 'js-cookie'
+import { SideBarContext } from '@/context/sideBarProvider';
 
 function login() {
-    const { containerLogin, containerBox, containerBox2, box1, box2, box3, containerBox3, containerBox4, input, active } = styles
+
+    const { containerLogin, containerBox, containerBox2, box1, box2, box3, containerBox3, containerBox4, input, active, button } = styles
     const [isRegister, setIsRegister] = useState(false);
     const [showPassword, setShowPassword] = useState(false)
-    const [name, setName] = useState();
-    const [password, setPassword] = useState();
+    const [name, setName] = useState('');
+    const [password, setPassword] = useState('');
+    const { toast } = useContext(ToastContext);
+    const [isLoading, setIsLoading] = useState(false)
+    const { setIsOpen, setUserId, setUserInfo } = useContext(SideBarContext);
+
     const handleShowPassword = () => {
         setShowPassword(!showPassword)
     }
+
+    const handleRegisterAndLogin = async () => {
+        setIsLoading(true)
+
+        try {
+            if (isRegister === true) {
+                await registerAuth({
+                    userName: name,
+                    password
+                })
+                    .then((res) => {
+                        toast.success(res.data.message);
+                        setIsLoading(false);
+                    })
+                    .catch((err) => {
+                        console.error("🔥 Lỗi đăng ký:", err);
+                        toast.error(err.response?.data?.message || "Đăng ký thất bại!");
+                        setIsLoading(false);
+                    });
+            }
+        } catch (error) {
+            console.log(error)
+        }
+
+        if (!isRegister) {
+            await loginAuth({
+                userName: name,
+                password
+            }).then((res) => {
+                setUserInfo(res.data)
+                setIsLoading(false)
+                const { token } = res.data
+                const { _id } = res.data.user
+                setUserId(_id)
+                Cookies.set('userId', _id);
+                Cookies.set('token', token);
+                toast.success('Sign in successfully')
+                setIsOpen(false)
+            }).catch((err) => {
+                setIsLoading(false)
+            })
+        }
+    }
+
     return (
         <div className={containerLogin}>
             <div className={containerBox}>
@@ -42,22 +95,21 @@ function login() {
 
             <div className={containerBox3}>
                 <div className={box2}>
-                    <div
-                        onChange={(e) => setName(e.target.addEventListener)}>{!isRegister ? 'Username or email' : 'Email address'}<span style={{
-                            color: 'red'
-                        }}>*</span></div>
-                    <input type="text" />
+                    <div>{!isRegister ? 'Username or email' : 'Email address'}<span style={{
+                        color: 'red'
+                    }}> *</span></div>
+                    <input type="text" onChange={(e) => setName(e.target.value)} />
                 </div>
 
                 <div className={box2} >
-                    <div
-                        onChange={(e) => setPassword(e.target.addEventListener)}>
+                    <div>
                         Password <span style={{
                             color: 'red'
-                        }}>*</span>
+                        }}> *</span>
                     </div>
                     <div className={input}>
-                        <input type={`${showPassword ? 'text' : 'password'}`} />
+                        <input type={`${showPassword ? 'text' : 'password'}`}
+                            onChange={(e) => setPassword(e.target.value)} />
                         <div onClick={handleShowPassword}
                             style={{
                                 cursor: 'pointer'
@@ -84,7 +136,11 @@ function login() {
                 </div>)}
             </div>
 
-            <Button content={!isRegister ? 'Log in' : 'Register'} isPrimary={true} />
+
+            {/* <button content={!isRegister ? 'Log in' : 'Register'} isPrimary={true}
+                onClick={() => handleRegisterAndLogin()} /> */}
+            <button className={button}
+                onClick={() => handleRegisterAndLogin()} >{!isRegister ? 'Log in' : 'Register'}</button>
         </div>
     )
 }

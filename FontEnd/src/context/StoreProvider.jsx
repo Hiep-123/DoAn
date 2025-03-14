@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from 'react';
-import { getAllCar } from '../apis/carService';
+import { getAllCar } from '@/apis/carService';
 export const StoreContext = createContext();
 
 export const StoreProvider = ({ children }) => {

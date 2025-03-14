@@ -13,7 +13,7 @@ function Header() {
         containerBoxIcon, menu
     } = styles;
 
-    const { setIsOpen, isOpen, setType } = useContext(SideBarContext);
+    const { setIsOpen, isOpen, setType, userId, userInfo } = useContext(SideBarContext);
     const navigate = useNavigate();
     const handleNavigateHome = () => {
         navigate('/')
@@ -50,9 +50,9 @@ function Header() {
                             Search
                         </div>
                         <div className={menu}
-                            onClick={() => { setIsOpen(!isOpen); setType('login') }}>
+                            onClick={() => { userId ? setIsOpen(false) : setIsOpen(!isOpen); setType('login') }}>
                             <CiUser size={'25px'} />
-                            Sign In
+                            {userId ? `Xin chào ${userInfo.user?.name}` : 'Sign in'}
                         </div>
                         <div onClick={handleNavigateBooking}>
                             <Button content={'Book Now'} />

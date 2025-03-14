@@ -1,12 +1,12 @@
 const bcrypt = require("bcryptjs");
-const { User, Account } = require("../models/model");
+const { User, Account } = require("../model/model");
 require("dotenv").config();
-
+const jwt = require("jsonwebtoken");
 // 🟢 API Đăng ký tài khoản
 exports.register = async (req, res) => {
     try {
         const { userName, password } = req.body;
-
+        console.log(req.body)
         // 🟢 Kiểm tra userName có tồn tại chưa
         const existingAccount = await Account.findOne({ userName });
         if (existingAccount) {
@@ -14,7 +14,10 @@ exports.register = async (req, res) => {
         }
 
         // Tạo User trước, tạm dùng userName làm name
-        const newUser = new User({ name: userName });
+        const newUser = new User({
+            name: userName,
+            email: req.body.email || undefined
+        });
         await newUser.save();
 
         // 🟢 Mã hóa mật khẩu
@@ -22,7 +25,7 @@ exports.register = async (req, res) => {
 
         // 🟢 Tạo tài khoản (Account) liên kết với User vừa tạo
         const newAccount = new Account({
-            userID: newUser._id,
+            userId: newUser._id,
             userName,
             password: hashedPassword
         });
@@ -36,50 +39,48 @@ exports.register = async (req, res) => {
     }
 };
 
-// API Đăng ký tài khoản
 exports.login = async (req, res) => {
     try {
-        const { userName, password } = req.body;
+        const { email, password } = req.body;
 
-        // 🟢 Kiểm tra tài khoản có tồn tại không
-        const account = await Account.findOne({ userName }).populate("userID");
+        // Tìm tài khoản theo email
+        const userAccount = await Account.findOne({ userName: email }) || await Account.findOne({ email });
 
-        if (!account) {
-            return res.status(400).json({ error: "Invalid username or password" });
+        if (!userAccount) {
+            return res.status(400).json({ error: "Email hoặc mật khẩu không đúng" });
         }
 
+        // Kiểm tra mật khẩu
+        const isPasswordValid = await bcrypt.compare(password, userAccount.password);
 
-        // 🟢 Kiểm tra mật khẩu
-        const isMatch = await bcrypt.compare(password, account.password);
-
-        if (!isMatch) {
-            return res.status(400).json({ error: "Invalid username or password" });
+        if (!isPasswordValid) {
+            return res.status(400).json({ error: "Email hoặc mật khẩu không đúng" });
         }
 
-        // 🟢 Tạo JWT Token
-        const token = jwt.sign(
-            { userId: account.userId._id, role: account.role }, process.env.JWT_SECRET,
-            { expiresIn: process.env.JWT_EXPIRES }
-        );
+        // Lấy thông tin user
+        const user = await User.findById(userAccount.userId);
+        if (!user) {
+            return res.status(400).json({ error: "Thông tin tài khoản không hợp lệ" });
+        }
 
-        // 🟢 Trả về thông tin user & token
+        // Tạo JWT token
+        const token = jwt.sign({ userId: user._id }, "secretKey", { expiresIn: "1h" });
+
+        // Trả về kết quả
         res.status(200).json({
-            message: "Đăng nhập thành công!",
-            token,
-            user: {
-                id: account.userId._id,
-                name: account.userID.name,
-                email: account.userID.email,
-                phone: account.userID.phone,
-                userName: account.userName,
-                role: account.role
+            message: "Đăng nhập thành công", token, user: {
+                _id: user._id,
+                name: user.name,
+                email: user.email,
+                phone: user.phone
             }
         });
     } catch (error) {
         console.error("🔥 Lỗi đăng nhập:", error);
-        res.status(500).json({ error: "Lỗi server" });
+        res.status(500).json({ error: error.message });
     }
 };
+
 
 exports.updateUser = async (req, res) => {
     try {
