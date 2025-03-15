@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 exports.register = async (req, res) => {
     try {
         const { userName, password } = req.body;
-        console.log(req.body)
+
         // 🟢 Kiểm tra userName có tồn tại chưa
         const existingAccount = await Account.findOne({ userName });
         if (existingAccount) {
@@ -44,11 +44,12 @@ exports.login = async (req, res) => {
         const { email, password } = req.body;
 
         // Tìm tài khoản theo email
-        const userAccount = await Account.findOne({ userName: email }) || await Account.findOne({ email });
+        const userAccount = await Account.findOne({ userName: email });
 
         if (!userAccount) {
             return res.status(400).json({ error: "Email hoặc mật khẩu không đúng" });
         }
+
 
         // Kiểm tra mật khẩu
         const isPasswordValid = await bcrypt.compare(password, userAccount.password);
@@ -97,6 +98,22 @@ exports.updateUser = async (req, res) => {
 
     } catch (error) {
         console.error("🔥 Lỗi cập nhật Profile:", error);
+        res.status(500).json({ error: error.message });
+    }
+};
+
+exports.getUserInfo = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const user = await User.findById(id);
+
+        if (!user) {
+            return res.status(404).json({ error: "User không tồn tại" });
+        }
+
+        res.status(200).json(user);
+    } catch (error) {
+        console.error("🔥 Lỗi lấy thông tin User:", error);
         res.status(500).json({ error: error.message });
     }
 };

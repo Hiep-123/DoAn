@@ -27,9 +27,9 @@ exports.getCarById = async (req, res) => {
   }
 
   try {
-    const car = await Car.findById(id);
+    const car = await Car.findById(id).populate('brandId', 'nameBrandCar');
     if (!car) return res.status(404).send('Car not found');
-    res.send(car);
+    res.status(200).json(car);
   } catch (error) {
     res.status(500).send(error);
   }

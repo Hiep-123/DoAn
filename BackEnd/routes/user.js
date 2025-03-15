@@ -1,12 +1,13 @@
 const express = require("express");
 const { authMiddleware } = require("../middleware/authMiddleware");
 const { User } = require("../model/model");
-const { register, login } = require("../controllers/authorController");
+const { register, login, getUserInfo } = require("../controllers/authorController");
 const router = express.Router();
 
 
 router.post("/register", register);
 router.post("/login", login);
+
 
 // 🟢 API lấy danh sách người dùng (cần đăng nhập)
 router.get("/users", authMiddleware, async (req, res) => {
@@ -18,5 +19,6 @@ router.get("/users", authMiddleware, async (req, res) => {
         res.status(500).json({ error: "Lỗi server" });
     }
 });
+router.get("/getInfo/:id", getUserInfo);
 
 module.exports = router;
