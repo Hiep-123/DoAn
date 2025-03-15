@@ -7,13 +7,12 @@ import MainLayout from '@components/Layout/Layout';
 import Footer from '@components/Footer/Footer';
 
 function DetailProduct() {
-    const { listCar } = useContext(StoreContext)
     return (
         <>
             <Header />
             <Banner />
             <MainLayout>
-                <ShowInfoCar data={listCar} />
+                <ShowInfoCar  />
             </MainLayout>
             <Footer />
         </>

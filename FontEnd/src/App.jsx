@@ -4,33 +4,35 @@ import routers from './routers/router'
 import { BookingProvider } from '@/context/BookingProvider';
 import { StoreProvider } from '@/context/StoreProvider'
 import { ToastProvider } from "@/context/ToastProvider";
-import { SideBarProvier } from '@/context/SideBarProvider';
+import { SideBarProvider } from '@/context/SideBarProvider';
 import SideBar from '@components/Sidebar/SideBar';
+import ScrollToTop from '@components/ScrollToTop/ScrollToTop'
 
 function App() {
-
+    
   return (
     <ToastProvider>
-      <SideBarProvier>
+      <SideBarProvider>
         <StoreProvider>
           <BookingProvider>
             <BrowserRouter>
               <SideBar />
-                <Routes>
-                  {routers.map((item, index) => {
-                    return (
-                      <Route
-                        path={item.path}
-                        element={<item.component />}
-                        key={index}
-                      />
-                    );
-                  })}
-                </Routes>
+              <ScrollToTop />
+              <Routes>
+                {routers.map((item, index) => {
+                  return (
+                    <Route
+                      path={item.path}
+                      element={<item.component />}
+                      key={index}
+                    />
+                  );
+                })}
+              </Routes>
             </BrowserRouter>
           </BookingProvider>
         </StoreProvider>
-      </SideBarProvier>
+      </SideBarProvider>
     </ToastProvider>
   )
 }

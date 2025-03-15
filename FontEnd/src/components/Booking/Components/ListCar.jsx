@@ -5,14 +5,18 @@ import React, { useContext } from 'react'
 import Loading from '@components/Loading/Loading';
 import { BookingContext } from '@/context/BookingProvider';
 import className from 'classnames'
+import { getbyIdCar } from '@/apis/carService';
 
 function ListCar({ data, isLoading }) {
   const { container, containerList } = styles
   const navigate = useNavigate();
   const { isShowGrid } = useContext(BookingContext)
-  const handleNavigateDetailProduct = (name) => {
+
+  const handleNavigateDetailProduct = async (name, id) => {
     const path = `/shop/${name.replace(/ /g, "-")}`;
-    navigate(path)
+    await getbyIdCar(id).then((res) => {
+      navigate(path, { state: { data: res.data } });
+    })
   }
   return (
     isLoading ? (
@@ -24,7 +28,7 @@ function ListCar({ data, isLoading }) {
         [containerList]: !isShowGrid
       })}>
         {data?.map((item) => (
-          <div key={item.id || item.category} onClick={() => handleNavigateDetailProduct(item.category)}>
+          <div key={item.id || item.category} onClick={() => handleNavigateDetailProduct(item.category, item._id)}>
             <ProductItem
               src={item.img}
               categoryCar={item.category}

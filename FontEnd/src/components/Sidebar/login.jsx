@@ -49,7 +49,7 @@ function login() {
 
         if (!isRegister) {
             await loginAuth({
-                userName: name,
+                email: name,
                 password
             }).then((res) => {
                 setUserInfo(res.data)
@@ -57,8 +57,8 @@ function login() {
                 const { token } = res.data
                 const { _id } = res.data.user
                 setUserId(_id)
-                Cookies.set('userId', _id);
-                Cookies.set('token', token);
+                Cookies.set('userId', _id, { expires: 1 });
+                Cookies.set('token', token, { expires: 1 });
                 toast.success('Sign in successfully')
                 setIsOpen(false)
             }).catch((err) => {

@@ -1,24 +1,26 @@
 import styles from './styles.module.scss'
 import ReviewForm from './ReviewForm';
 import Button from '@components/Button/Button'
+import { useLocation } from "react-router-dom";
 function ShowInfoCar() {
     const { container, containerBoxLeft, boxLeft, category, brandCar, price,
         boxIcon, icon, boxRight, containerForm, boxInput
     } = styles
-
+    const location = useLocation();
+    const car = location.state;
     return (
         <div className={container} >
-            <img src='https://xstore.b-cdn.net/elementor/demos/rental-car/wp-content/uploads/sites/81/2022/07/Image_7-1.jpg' alt="" />
+            <img src={car.data?.img} alt="" />
             <div className={containerBoxLeft}>
                 <div className={boxLeft}>
                     <span className={category}>Category: <span style={{
                         color: 'blue'
-                    }}>Electric</span></span>
+                    }}>{car.data?.brandId.nameBrandCar}</span></span>
 
-                    <h1 className={brandCar}>Toyota Cayenne</h1>
+                    <h1 className={brandCar}>{car.data?.category}</h1>
 
                     <div className={price}>
-                        $42.00
+                        $ {car.data.pricePerDay}.00
                     </div>
 
                     <div style={{
@@ -108,7 +110,7 @@ function ShowInfoCar() {
                             <span>Drop Off Time</span>
                             <input type="text" />
                         </div>
-                        <Button content={'Request For Booking'} isPrimary={true}/>
+                        <Button content={'Request For Booking'} isPrimary={true} />
                     </div>
                 </div>
             </div>

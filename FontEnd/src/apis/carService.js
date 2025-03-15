@@ -9,4 +9,8 @@ const getCar = async (query) => {
     const res = await axiosClient.get(`/car/sorted?sortId=${sortId}&showId=${showId}`);
     return res.data;
 }
-export { getAllCar, getCar }; 
+
+const getbyIdCar = async (id) => {
+    return await axiosClient.get(`/car/${id}`)
+}
+export { getAllCar, getCar, getbyIdCar }; 

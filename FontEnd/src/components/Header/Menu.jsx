@@ -15,6 +15,7 @@ function Menu({ content }) {
             return 'rgb(31, 244, 215)'
         }
     }
+    
 
     return (
         <div className={menu}

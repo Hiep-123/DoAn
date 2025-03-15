@@ -9,6 +9,7 @@ import ShowPost from './showPost';
 import { useNavigate } from "react-router";
 import { StoreContext } from '@/context/StoreProvider';
 import Loading from '@components/Loading/Loading';
+import { getbyIdCar } from '@/apis/carService';
 
 function SliderCommon({ isPost, dataPost, isLoading }) {
     const { listCar } = useContext(StoreContext);
@@ -42,10 +43,14 @@ function SliderCommon({ isPost, dataPost, isLoading }) {
         prevArrow: <CustomPrevArrow isPost={isPost} />
     };
 
-    const handleNavigateDetailProduct = (name) => {
+    const handleNavigateDetailProduct = async (name, id) => {
+        console.log(id)
         const path = `/shop/${name.replace(/ /g, "-")}`;
-        navigate(path);
+        await getbyIdCar(id).then((res) => {
+            navigate(path, { state: { data: res.data } });
+        })
     };
+
 
     return (
         <>
@@ -66,8 +71,8 @@ function SliderCommon({ isPost, dataPost, isLoading }) {
                                     post={item.post}
                                 />
                             ))
-                            : listCar?.slice(0,4).map((item, index) => (
-                                <div key={index} onClick={() => handleNavigateDetailProduct(item.category)}>
+                            : listCar?.slice(0, 4).map((item, index) => (
+                                <div key={index} onClick={() => handleNavigateDetailProduct(item.category, item._id)}>
                                     <ProductItem
                                         src={item.img}
                                         categoryCar={item.category}

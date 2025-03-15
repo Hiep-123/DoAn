@@ -6,4 +6,9 @@ const loginAuth = async (data) => {
 const registerAuth = async (data) => {
     return await axiosClient.post('/user/register', data);
 }
-export { loginAuth, registerAuth }; 
+
+const getUserId = async (id) => {
+    return await axiosClient.get(`/user/getInfo/${id}`)
+
+}
+export { loginAuth, registerAuth, getUserId }; 

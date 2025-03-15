@@ -4,6 +4,7 @@ import { GoStarFill } from 'react-icons/go';
 import className from 'classnames'
 import { addComment } from "@/apis/commentService";
 import { ToastContext } from "@/context/ToastProvider";
+import { SideBarContext } from "@/context/sideBarProvider";
 
 const ReviewForm = () => {
     const { reviewForm, title, subtitle, ratingSection,
@@ -16,7 +17,7 @@ const ReviewForm = () => {
     const [comment, setComment] = useState(''); //review
     const [name, setName] = useState(); //name
     const [email, setEmail] = useState(); // email
-
+    const { userId } = useContext(SideBarContext)
     const renderStar = (length, isActive) => {
         return Array.from({ length }, (_, index) => (
             <GoStarFill
@@ -38,7 +39,7 @@ const ReviewForm = () => {
     const handleAddComment = async () => {
         const data = {
             bookingId: '67d1856049ef41607d2ff4c7',
-            userId: '67d1856049ef41607d2ff4c7',
+            userId: userId,
             ratingPoints: rating,
             comment,
             name,
@@ -114,7 +115,7 @@ const ReviewForm = () => {
             <button className={submitBtn}
                 style={{
                     cursor: 'pointer',
-                    marginTop:'15px'
+                    marginTop: '15px'
                 }}
                 onClick={handleAddComment}>SUBMIT</button>
         </div>
