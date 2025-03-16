@@ -1,0 +1,29 @@
+.boxInput {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    div {
+        font-size: 23px;
+    }
+
+    span {
+        color: red;
+    }
+
+    input {
+        width: 100%;
+        height: 50px;
+        font-size: 20px;
+        padding: 10px;
+        border: none;
+        border-style: solid;
+        border-width: 1px 1px 1px 1px;
+        border-color: #EBEBEB;
+        border-radius: 4px 4px 4px 4px;
+
+        &:focus {
+            outline: none;
+        }
+    }
+}

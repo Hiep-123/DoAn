@@ -94,4 +94,47 @@
     text-align: center;
     flex-wrap: wrap;
     margin: auto;
+
+}
+
+.containeStep {
+    color: white;
+    width: 60%;
+    display: flex;
+    margin: auto;
+    letter-spacing: 3px;
+
+    .boxStep {
+        width: 100%;
+        display: flex;
+        gap: 10px;
+        justify-content: space-between;
+        align-items: center;
+
+        .box1 {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+
+            .shape {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                background-color: white;
+                color: black;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+
+        .line {
+            width: 150px;
+            height: 2px;
+            color: white;
+            background-color: white;
+        }
+    }
 }

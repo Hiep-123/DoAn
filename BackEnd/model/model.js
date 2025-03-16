@@ -32,6 +32,12 @@ const bookingSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Car'
     },
+    pickupAddress: String,
+    pickupDate: Date,
+    pickupTime: String,
+    dropOffAddress: String,
+    dropOffTime: String,
+    dropOffDate: Date,
     status: {
         type: String,
         enum: ['pending', 'approved', 'cancelled'],
@@ -125,6 +131,7 @@ const commentSchema = new mongoose.Schema({
     bookingId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Booking',
+        default: null
     },
     userId: {
         type: mongoose.Schema.Types.ObjectId,

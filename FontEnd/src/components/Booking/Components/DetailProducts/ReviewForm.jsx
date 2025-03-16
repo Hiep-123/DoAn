@@ -17,7 +17,8 @@ const ReviewForm = () => {
     const [comment, setComment] = useState(''); //review
     const [name, setName] = useState(); //name
     const [email, setEmail] = useState(); // email
-    const { userId } = useContext(SideBarContext)
+    const { userId, setIsOpen } = useContext(SideBarContext)
+    const [bookingId, setBookingId] = useState(null);
     const renderStar = (length, isActive) => {
         return Array.from({ length }, (_, index) => (
             <GoStarFill
@@ -37,23 +38,30 @@ const ReviewForm = () => {
     };
 
     const handleAddComment = async () => {
-        const data = {
-            bookingId: '67d1856049ef41607d2ff4c7',
-            userId: userId,
-            ratingPoints: rating,
-            comment,
-            name,
-            email
+        if (!name || !email || !phone || !pickupAddress || !pickupDate || !pickupTime || !dropOffAddress || !dropOffDate || !dropOffTime) {
+            toast.error("Please fill in all required fields.");
+            return;
+        }
+        if (!userId) {
+            toast.warn('Vui lòng đăng nhập để bình luận')
+            setIsOpen(true)
+        } else {
+            const data = {
+                bookingId,
+                userId: userId,
+                ratingPoints: rating,
+                comment,
+                name,
+                email
+            }
+
+            addComment(data).then((res) => {
+                toast.success('Comment is successfully')
+            }).catch((err) => {
+                console.log(err)
+            })
         }
 
-        addComment(data).catch((err) => {
-            console.log(err)
-        })
-
-
-        if (addComment) {
-            toast.success('You rate the booking service successfully')
-        }
     }
 
     return (
@@ -117,7 +125,8 @@ const ReviewForm = () => {
                     cursor: 'pointer',
                     marginTop: '15px'
                 }}
-                onClick={handleAddComment}>SUBMIT</button>
+                disabled={!rating || !name || !email}
+                onClick={() => handleAddComment()}>SUBMIT</button>
         </div>
     );
 };

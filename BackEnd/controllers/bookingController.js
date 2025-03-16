@@ -1,8 +1,17 @@
-const Booking = require('../model/model');
+const { Booking, User } = require('../model/model');
 
 exports.createBooking = async (req, res) => {
     try {
+        const { userId, name, email, phone } = req.body;
         const booking = new Booking(req.body);
+
+        const updatedUser = await User.findByIdAndUpdate(userId, { name, phone }, { new: true });
+
+        if (!updatedUser) {
+            return res.status(404).json({ error: "User not found" });
+        }
+        await updatedUser.save()
+
         await booking.save();
         res.status(201).send(booking);
     } catch (error) {

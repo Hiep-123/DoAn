@@ -9,7 +9,7 @@ import SideBar from '@components/Sidebar/SideBar';
 import ScrollToTop from '@components/ScrollToTop/ScrollToTop'
 
 function App() {
-    
+
   return (
     <ToastProvider>
       <SideBarProvider>

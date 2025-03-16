@@ -9,6 +9,7 @@ import Menu from './Menu';
 import { SideBarContext } from '@/context/sideBarProvider';
 
 function Header() {
+
     const { container, containerHeader, containerBox, containerMenu,
         containerBoxIcon, menu, dropdown, dropdownItem
     } = styles;
@@ -19,7 +20,7 @@ function Header() {
 
     const handleNavigateHome = () => navigate('/');
     const handleNavigateBooking = () => navigate('/shop');
-
+    console.log(userInfo)
     return (
         <div className={container}>
             <div className={containerHeader}>
@@ -53,8 +54,9 @@ function Header() {
                                     setType('login');
                                 }
                             }}
-                            style={{ position: 'relative' }}
-                        >
+                            style={{
+                                position: 'relative'
+                            }} >
                             {!userId && <CiUser size={'25px'} />}
                             {userId ? `Xin chào, ${userInfo?.name}` : 'Sign in'}
 

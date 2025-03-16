@@ -13,7 +13,10 @@ const routers = [
         path: '/shop/:ProductName',
         component: lazy(() => import('@components/Booking/Components/DetailProducts/DetailProduct'))
     },
-
+    {
+        path: '/shop/:ProductName/checkout',
+        component: lazy(() => import('@components/Booking/Components/Checkout'))
+    }
 
 ]
 
