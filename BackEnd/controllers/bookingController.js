@@ -1,11 +1,19 @@
-const { Booking, User } = require('../model/model');
+const { Booking, User, Car } = require('../model/model');
 
 exports.createBooking = async (req, res) => {
     try {
-        const { userId, name, email, phone } = req.body;
+        const { userId, name, phone, carId } = req.body;
         const booking = new Booking(req.body);
 
-        const updatedUser = await User.findByIdAndUpdate(userId, { name, phone }, { new: true });
+        const updatedUser = await User.findByIdAndUpdate(
+            userId,
+            {
+                name,
+                phone,
+                $push: { bookingId: booking._id, carId: carId }
+            },
+            { new: true }
+        );
 
         if (!updatedUser) {
             return res.status(404).json({ error: "User not found" });
@@ -13,7 +21,11 @@ exports.createBooking = async (req, res) => {
         await updatedUser.save()
 
         await booking.save();
-        res.status(201).send(booking);
+        res.status(201).json({
+            message: "Đặt xe thành công!",
+            booking,
+            user: updatedUser
+        });
     } catch (error) {
         res.status(400).send(error);
     }
@@ -30,7 +42,7 @@ exports.getAllBookings = async (req, res) => {
 
 exports.getBookingById = async (req, res) => {
     try {
-        const booking = await Booking.findById(req.params.id);
+        const booking = await Booking.findById(req.params.id).populate('carId').populate('userId');
         if (!booking) {
             return res.status(404).send();
         }

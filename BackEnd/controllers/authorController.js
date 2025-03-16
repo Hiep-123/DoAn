@@ -50,7 +50,6 @@ exports.login = async (req, res) => {
             return res.status(400).json({ error: "Email hoặc mật khẩu không đúng" });
         }
 
-
         // Kiểm tra mật khẩu
         const isPasswordValid = await bcrypt.compare(password, userAccount.password);
 
@@ -59,9 +58,16 @@ exports.login = async (req, res) => {
         }
 
         // Lấy thông tin user
-        const user = await User.findById(userAccount.userId);
+        let user = await User.findById(userAccount.userId);
+
         if (!user) {
             return res.status(400).json({ error: "Thông tin tài khoản không hợp lệ" });
+        }
+
+        // 🔥 Nếu email chưa lưu trong User, cập nhật lại
+        if (!user.email) {
+            user.email = email;
+            await user.save();
         }
 
         // Tạo JWT token
@@ -69,10 +75,12 @@ exports.login = async (req, res) => {
 
         // Trả về kết quả
         res.status(200).json({
-            message: "Đăng nhập thành công", token, user: {
+            message: "Đăng nhập thành công",
+            token,
+            user: {
                 _id: user._id,
                 name: user.name,
-                email: user.email,
+                email: userAccount.userId.email,
                 phone: user.phone
             }
         });
@@ -81,6 +89,7 @@ exports.login = async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 };
+
 
 
 exports.updateUser = async (req, res) => {

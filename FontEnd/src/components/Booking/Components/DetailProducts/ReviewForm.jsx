@@ -38,10 +38,7 @@ const ReviewForm = () => {
     };
 
     const handleAddComment = async () => {
-        if (!name || !email || !phone || !pickupAddress || !pickupDate || !pickupTime || !dropOffAddress || !dropOffDate || !dropOffTime) {
-            toast.error("Please fill in all required fields.");
-            return;
-        }
+
         if (!userId) {
             toast.warn('Vui lòng đăng nhập để bình luận')
             setIsOpen(true)
@@ -125,7 +122,6 @@ const ReviewForm = () => {
                     cursor: 'pointer',
                     marginTop: '15px'
                 }}
-                disabled={!rating || !name || !email}
                 onClick={() => handleAddComment()}>SUBMIT</button>
         </div>
     );

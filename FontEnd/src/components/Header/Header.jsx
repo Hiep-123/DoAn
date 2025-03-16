@@ -20,7 +20,7 @@ function Header() {
 
     const handleNavigateHome = () => navigate('/');
     const handleNavigateBooking = () => navigate('/shop');
-    console.log(userInfo)
+
     return (
         <div className={container}>
             <div className={containerHeader}>
@@ -58,7 +58,7 @@ function Header() {
                                 position: 'relative'
                             }} >
                             {!userId && <CiUser size={'25px'} />}
-                            {userId ? `Xin chào, ${userInfo?.name}` : 'Sign in'}
+                            {userId ? `Xin chào, ${userInfo?.email || userInfo?.name}` : 'Sign in'}
 
                             {/* Dropdown Logout */}
                             {showDropdown && userId && (

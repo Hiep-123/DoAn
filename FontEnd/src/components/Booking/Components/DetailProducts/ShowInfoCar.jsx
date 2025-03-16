@@ -28,7 +28,7 @@ function ShowInfoCar() {
     const [dropOffDate, setDropOffDate] = useState('');
     const [dropOffTime, setDropOffTime] = useState('');
     const [isBookingSuccess, setIsBookingSuccess] = useState(false);
-
+    const [bookingId, setBookingId] = useState('')
     const isValidGmail = (email) => {
         const gmailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
         return gmailRegex.test(email);
@@ -74,9 +74,12 @@ function ShowInfoCar() {
         };
 
         try {
-            await addBooking(data);
-            toast.success("You have successfully rented a car!");
-            setIsBookingSuccess(true);
+            await addBooking(data).then((res) => {
+                console.log(res)
+                setBookingId(res.data.booking._id)
+                toast.success("You have successfully rented a car!");
+                setIsBookingSuccess(true);
+            });
         } catch (err) {
             toast.error("Booking failed. Please try again.");
         }
@@ -84,18 +87,20 @@ function ShowInfoCar() {
         setDropOffDate('')
         setDropOffTime('')
         setPickupAddress('')
-        setPickupAddress('')
+        setPickupDate('')
         setPickupTime('')
         setName('')
         setEmail('')
         setPhone('')
     };
-    console.log(name)
+    console.log(bookingId)
+
     useEffect(() => {
         if (isBookingSuccess) {
-            navigate(`/shop/${ProductName}/checkout`);
+            navigate(`/shop/${ProductName}/checkout`, { state: bookingId });
         }
     }, [isBookingSuccess, navigate, car.data?.name]);
+
     return (
         <div className={container} >
             <img src={car.data?.img} alt="" />
@@ -162,31 +167,50 @@ function ShowInfoCar() {
 
                 <div className={boxRight}>
                     <div className={containerForm}>
-                        <InputCommon value={name} label={'Full Name'} required
+                        <InputCommon value={name} label={'Full Name'}
+                            required
+                            placeholder={'Nguyen Van A'}
                             onChange={(e) => setName(e.target.value)} />
 
-                        <InputCommon value={phone} label={'Phone Number'} required
+                        <InputCommon value={phone} label={'Phone Number'}
+                            required
+                            placeholder={'0123456789'}
                             onChange={(e) => setPhone(e.target.value)} />
 
                         <InputCommon value={email} label={'Email'} required
+                            placeholder={'abc@gmail.com'}
                             onChange={(e) => setEmail(e.target.value)} />
 
-                        <InputCommon value={pickupAddress} label={'Pickup Address'} required
+                        <InputCommon value={pickupAddress} label={'Pickup Address'}
+                            required
+                            placeholder={"TP HCM"}
                             onChange={(e) => setPickupAddress(e.target.value)} />
 
-                        <InputCommon type={'date'} value={pickupDate} label={'Pickup Date'} required
+                        <InputCommon type={'date'} value={pickupDate} label={'Pickup Date'}
+                            required
+                            placeholder={'05/22/2025'}
                             onChange={(e) => setPickupDate(e.target.value)} />
 
-                        <InputCommon value={pickupTime} label={'Pickup Time'} required
+                        <InputCommon value={pickupTime} label={'Pickup Time'}
+                            required
+                            placeholder={'9h'}
                             onChange={(e) => setPickupTime(e.target.value)} />
 
-                        <InputCommon value={dropOffAddress} label={'Drop Off Address'} required
+                        <InputCommon value={dropOffAddress} label={'Drop Off Address'}
+                            required
+                            placeholder={'TP HCM'}
                             onChange={(e) => setDropOffAddress(e.target.value)} />
 
-                        <InputCommon type={"date"} value={dropOffDate} label={'Drop Off Date'} required
+                        <InputCommon type={"date"} value={dropOffDate}
+                            label={'Drop Off Date'}
+                            required
+                            placeholder={'25/05/2025'}
                             onChange={(e) => setDropOffDate(e.target.value)} />
 
-                        <InputCommon value={dropOffTime} label={'Drop Off Time'} required
+                        <InputCommon value={dropOffTime}
+                            label={'Drop Off Time'}
+                            required
+                            placeholder={'10h'}
                             onChange={(e) => setDropOffTime(e.target.value)} />
 
                         <button className={button}

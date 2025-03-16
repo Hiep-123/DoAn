@@ -62,6 +62,7 @@ function login() {
                 toast.success('Sign in successfully')
                 setIsOpen(false)
             }).catch((err) => {
+                toast.danger("Email or Password invalid")
                 setIsLoading(false)
             })
         }
