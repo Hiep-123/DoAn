@@ -6,6 +6,7 @@ import { SideBarContext } from "@/context/sideBarProvider";
 import { ToastContext } from "@/context/ToastProvider";
 import { addBooking } from '@/apis/bookingService';
 import InputCommon from '@components/InputCommon/InputCommon';
+
 function ShowInfoCar() {
     const { container, containerBoxLeft, boxLeft, category, brandCar, price,
         boxIcon, icon, boxRight, containerForm, boxInput, button
@@ -27,8 +28,10 @@ function ShowInfoCar() {
     const [dropOffAddress, setDropOffAddress] = useState('')
     const [dropOffDate, setDropOffDate] = useState('');
     const [dropOffTime, setDropOffTime] = useState('');
+    const [numberCar, setNumberCar] = useState('');
     const [isBookingSuccess, setIsBookingSuccess] = useState(false);
     const [bookingId, setBookingId] = useState('')
+
     const isValidGmail = (email) => {
         const gmailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
         return gmailRegex.test(email);
@@ -61,7 +64,7 @@ function ShowInfoCar() {
 
         const data = {
             userId,
-            carId: car.data?._id,
+            carId: car.data._id,
             pickupAddress,
             pickupDate,
             pickupTime,
@@ -92,12 +95,12 @@ function ShowInfoCar() {
         setName('')
         setEmail('')
         setPhone('')
+        setNumberCar('')
     };
-    console.log(bookingId)
 
     useEffect(() => {
         if (isBookingSuccess) {
-            navigate(`/shop/${ProductName}/checkout`, { state: bookingId });
+            navigate(`/shop/${ProductName}/checkout`, { state: { bookingId, numberCar } });
         }
     }, [isBookingSuccess, navigate, car.data?.name]);
 
@@ -180,6 +183,12 @@ function ShowInfoCar() {
                         <InputCommon value={email} label={'Email'} required
                             placeholder={'abc@gmail.com'}
                             onChange={(e) => setEmail(e.target.value)} />
+
+                        <InputCommon value={numberCar}
+                            label={'Number of vehicles'}
+                            required
+                            placeholder={'1'}
+                            onChange={(e) => setNumberCar(e.target.value)} />
 
                         <InputCommon value={pickupAddress} label={'Pickup Address'}
                             required

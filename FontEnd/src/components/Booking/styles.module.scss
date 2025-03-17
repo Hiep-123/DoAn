@@ -64,12 +64,11 @@
     display: flex;
     gap: 40px;
     justify-content: space-between;
-    margin: 30px 0;
+    margin: 40px 0;
     height: 100%;
 
     .box1 {
         border-top: 1px solid #b3b3b3;
-        border-bottom: 1px solid #b3b3b3;
         padding-top: 20px;
         padding-bottom: 30px;
         width: 55%;
@@ -82,7 +81,7 @@
         width: 45%;
         height: 80%;
         border: 1px solid #333;
-        border-width: 3px;
+        border-width: 2px;
         padding: 20px;
 
         .containerBox2 {
@@ -106,10 +105,13 @@
                     gap: 10px;
                     justify-content: center;
                     align-content: center;
+                    border-top: 1px solid #b3b3b3;
+                    border-bottom: 1px solid #b3b3b3;
+                    border-width: 2.3px;
 
                     img {
-                        width: 150px;
-                        height: 150px;
+                        width: 180px;
+                        height: 180px;
                     }
                 }
 
@@ -136,6 +138,73 @@ span {
 
 .cashPayment {
     display: flex;
-    gap: 10px;
+    gap: 1px;
     flex-direction: column;
+}
+
+.contentMenu {
+    font-size: 21px;
+    line-height: 28px;
+    word-spacing: 2px;
+    color: #7a7a7a;
+    height: 0px;
+    padding: 0px 10px;
+    transition: all 0, 3s ease;
+    overflow: hidden;
+}
+
+.isVisibility {
+    overflow: visible;
+    height: auto;
+    padding-left: 25px;
+    padding-top: 5px;
+}
+
+.button {
+    margin: 20px 0;
+    width: 100%;
+    height: 60px;
+    font-size: 25px;
+    color: white;
+    background-color: black;
+    padding: 10px;
+    text-align: center;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+fieldset {
+    border: 1px solid #e1e1e1;
+    border-radius: #e1e1e1;
+    margin: 0 0 2em;
+    padding: 1.5em 2.5em;
+    min-width: 0;
+    display: inline-block;
+    width: 100%;
+    padding-right: 7px;
+    padding-left: 7px;
+}
+
+
+.saleBooster {
+    margin-bottom: 10px;
+    padding-left: 7px;
+    padding-right: 7px;
+    width: 100%;
+    text-align: center;
+}
+
+legend {
+    font-size: 1rem;
+    text-transform: uppercase;
+    color: #222;
+    margin-bottom: 0;
+    width: 100%;
+    text-align: center;
+}
+
+.subtitle {
+    text-align: center;
 }

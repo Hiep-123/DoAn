@@ -114,15 +114,30 @@ exports.updateUser = async (req, res) => {
 exports.getUserInfo = async (req, res) => {
     try {
         const { id } = req.params;
-        const user = await User.findById(id);
+
+        // Tìm user và populate role từ Account
+        const user = await User.findById(id)
+            .select("name email phone") // Chỉ lấy những trường cần thiết từ User
+            .lean(); // Tăng hiệu suất
 
         if (!user) {
             return res.status(404).json({ error: "User không tồn tại" });
         }
 
-        res.status(200).json(user);
+        // Lấy role từ bảng Account
+        const account = await Account.findOne({ userId: id }).select("role").lean();
+
+        res.status(200).json({
+            id: user._id,
+            name: user.name,
+            email: user.email,
+            phone: user.phone,
+            role: account?.role || "user" // Nếu không tìm thấy, mặc định 'user'
+        });
+
     } catch (error) {
         console.error("🔥 Lỗi lấy thông tin User:", error);
         res.status(500).json({ error: error.message });
     }
 };
+

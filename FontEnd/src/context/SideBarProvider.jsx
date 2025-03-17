@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 import { getUserId } from '@/apis/authorService';
+import { useNavigate } from 'react-router-dom';
 
 export const SideBarContext = createContext();
 
@@ -9,7 +10,7 @@ export const SideBarProvider = ({ children }) => {
     const [type, setType] = useState(null);
     const [userId, setUserId] = useState(Cookies.get('userId'));
     const [userInfo, setUserInfo] = useState(null);
-
+    const navigate = useNavigate();
     const handleLogOut = () => {
         Cookies.remove('token');
         Cookies.remove('refreshToken');
@@ -19,9 +20,11 @@ export const SideBarProvider = ({ children }) => {
 
         setUserId(null);
         setUserInfo(null);
+        navigate('/');
         window.location.reload();
-    };
 
+    };
+    console.log(userInfo)
     const value = {
         setIsOpen,
         type,

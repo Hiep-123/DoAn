@@ -1,5 +1,6 @@
 const { Booking, User, Car } = require('../model/model');
 
+
 exports.createBooking = async (req, res) => {
     try {
         const { userId, name, phone, carId } = req.body;

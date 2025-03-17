@@ -89,15 +89,17 @@ const paymentScheme = new mongoose.Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
+        required: true
     },
     bookingId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Booking'
+        ref: 'Booking',
+        required: true
     },
-
-    paythod: {
+    method: {
         type: String,
-        enum: ['credit_card', 'paypal', 'cash', 'bank_transfer', 'crypto']
+        enum: ['cash', 'transfer'],
+        required: true
     },
     paymentStatus: {
         type: String,
@@ -108,23 +110,28 @@ const paymentScheme = new mongoose.Schema({
         type: Date,
         default: Date.now
     }
-}, [{ timestamps: true }]);
+}, { timestamps: true }); // Đúng format
 
-//chi tiet thanh toan
-const detailPayment = new mongoose.Schema({
+const detailPaymentSchema = new mongoose.Schema({
     bookingId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Booking'
+        ref: 'Booking',
+        required: true
     },
     paymentId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Payment'
+        ref: 'Payment',
+        required: true
     },
-    amountCar: Number,
+    amountCar: {
+        type: Number,
+        required: true
+    },
     totalAmount: {
-        type: Number
+        type: Number,
+        required: true
     }
-}, [{ timestamps: true }])
+}, { timestamps: true });
 
 // danh gia
 const commentSchema = new mongoose.Schema({
@@ -150,9 +157,9 @@ let Comment = mongoose.model('Comment', commentSchema);
 let User = mongoose.model('User', userSchema);
 let Car = mongoose.model('Car', carSchema)
 let BrandCar = mongoose.model('BrandCar', brandCarShema)
-let Booking = mongoose.model('BookingCar', bookingSchema)
+let Booking = mongoose.model('Booking', bookingSchema)
 let Account = mongoose.model('Account', accountSchema)
 let Payment = mongoose.model('Payment', paymentScheme)
-let DetailPayment = mongoose.model('DetailPayment', detailPayment)
+let DetailPayment = mongoose.model('DetailPayment', detailPaymentSchema)
 
 module.exports = { Car, BrandCar, User, Booking, Account, Payment, DetailPayment, Comment }

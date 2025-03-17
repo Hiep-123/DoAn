@@ -8,6 +8,7 @@ import { ToastContext } from "@/context/ToastProvider";
 import { loginAuth, registerAuth } from '@/apis/authorService';
 import Cookies from 'js-cookie'
 import { SideBarContext } from '@/context/sideBarProvider';
+import { useNavigate } from 'react-router-dom';
 
 function login() {
 
@@ -18,8 +19,8 @@ function login() {
     const [password, setPassword] = useState('');
     const { toast } = useContext(ToastContext);
     const [isLoading, setIsLoading] = useState(false)
-    const { setIsOpen, setUserId, setUserInfo } = useContext(SideBarContext);
-
+    const { setIsOpen, setUserId, setUserInfo, userInfo } = useContext(SideBarContext);
+    const navigate = useNavigate();
     const handleShowPassword = () => {
         setShowPassword(!showPassword)
     }
@@ -61,12 +62,19 @@ function login() {
                 Cookies.set('token', token, { expires: 1 });
                 toast.success('Sign in successfully')
                 setIsOpen(false)
+
             }).catch((err) => {
                 toast.danger("Email or Password invalid")
                 setIsLoading(false)
             })
         }
     }
+    useEffect(() => {
+        if (userInfo && userInfo.role) {
+            console.log("🔄 Điều hướng đến:", userInfo.role === "admin" ? "/page/admin" : "/");
+            navigate(userInfo.role === "admin" ? "/page/admin" : "/");
+        }
+    }, [userInfo]); // Chạy mỗi khi userInfo thay đổi
 
     return (
         <div className={containerLogin}>

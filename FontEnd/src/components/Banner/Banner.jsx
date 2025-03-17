@@ -30,7 +30,9 @@ function Banner() {
                     location.pathname === "/shop" ? (
                         // Nếu chỉ ở trang /shop
                         <div className={shop}>
-                            <p onClick={() => navigate('/')}>Home {'>'}</p> <span> SHOP</span>
+                            <p onClick={() => navigate('/')}>Home {'>'}</p> <span style={{
+                                color: 'white'
+                            }}> SHOP</span>
                         </div>
                     ) : (
                         <>

@@ -22,6 +22,7 @@ export const BookingProvider = ({ children }) => {
     const [isShowGrid, setIsShowGrid] = useState(true);
     const [isLoading, setIsLoading] = useState(false);
     const [dataListSortCar, setDataListSortCar] = useState([]);
+    const [dataBooking, setDataBooking] = useState("");
 
     // 🟢 Hàm gọi API lấy dữ liệu xe
     const handleLoadCar = async () => {
@@ -40,8 +41,6 @@ export const BookingProvider = ({ children }) => {
         }
     };
 
-
-
     useEffect(() => {
         handleLoadCar();
     }, [sortId, showId]);  // Theo dõi sortId
@@ -58,7 +57,8 @@ export const BookingProvider = ({ children }) => {
         showId,
         handleLoadCar,
         dataListSortCar,
-        
+        dataBooking,
+        setDataBooking
     };
 
 

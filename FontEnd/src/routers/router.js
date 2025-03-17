@@ -16,6 +16,10 @@ const routers = [
     {
         path: '/shop/:ProductName/checkout',
         component: lazy(() => import('@components/Booking/Components/Checkout'))
+    },
+    {
+        path: '/page/admin',
+        component: lazy(() => import('@page/components/HomeAdmin'))
     }
 
 ]

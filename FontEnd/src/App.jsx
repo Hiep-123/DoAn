@@ -12,10 +12,10 @@ function App() {
 
   return (
     <ToastProvider>
-      <SideBarProvider>
-        <StoreProvider>
-          <BookingProvider>
-            <BrowserRouter>
+      <BookingProvider>
+        <BrowserRouter>
+          <SideBarProvider>
+            <StoreProvider>
               <SideBar />
               <ScrollToTop />
               <Routes>
@@ -29,10 +29,10 @@ function App() {
                   );
                 })}
               </Routes>
-            </BrowserRouter>
-          </BookingProvider>
-        </StoreProvider>
-      </SideBarProvider>
+            </StoreProvider>
+          </SideBarProvider>
+        </BrowserRouter>
+      </BookingProvider>
     </ToastProvider>
   )
 }

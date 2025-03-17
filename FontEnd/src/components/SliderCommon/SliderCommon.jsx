@@ -44,7 +44,6 @@ function SliderCommon({ isPost, dataPost, isLoading }) {
     };
 
     const handleNavigateDetailProduct = async (name, id) => {
-        console.log(id)
         const path = `/shop/${name.replace(/ /g, "-")}`;
         await getbyIdCar(id).then((res) => {
             navigate(path, { state: { data: res.data } });

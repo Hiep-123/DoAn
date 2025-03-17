@@ -1,20 +1,47 @@
-const Payment = require('../model/model');
+const { Payment, DetailPayment } = require('../model/model');
+const mongoose = require('mongoose');
 
 exports.createPayment = async (req, res) => {
     try {
+        const { userId, bookingId, method, amountCar, totalAmount } = req.body;
+
+        // Kiểm tra ObjectId có hợp lệ không
+        if (!mongoose.Types.ObjectId.isValid(userId) || !mongoose.Types.ObjectId.isValid(bookingId)) {
+            return res.status(400).json({ error: "Invalid ObjectId format" });
+        }
+
+        // Tạo thanh toán mới
         const payment = new Payment({
-            user: req.body.user,
-            cars: req.body.cars,
-            amount: req.body.amount,
-            paythod: req.body.paythod,
-            paymentStatus: req.body.paymentStatus
+            userId,
+            bookingId,
+            method,
+            paymentStatus: 'pending' // Mặc định là pending
         });
+
         await payment.save();
-        res.status(201).send(payment);
+
+        // Lưu chi tiết thanh toán
+        const detailPayment = new DetailPayment({
+            bookingId,
+            paymentId: payment._id,
+            amountCar,
+            totalAmount
+        });
+
+        await detailPayment.save();
+
+        res.status(201).json({
+            message: "Payment created successfully!",
+            payment,
+            detailPayment
+        });
+
     } catch (error) {
-        res.status(400).send(error);
+        console.error("Error in createPayment:", error);
+        res.status(500).json({ error: "Internal Server Error" });
     }
 };
+
 
 exports.getAllPayments = async (req, res) => {
     try {
