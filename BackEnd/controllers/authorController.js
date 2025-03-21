@@ -1,87 +1,79 @@
 const bcrypt = require("bcryptjs");
-const { User, Account } = require("../model/model");
+const { User } = require("../model/model");
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
-// 🟢 API Đăng ký tài khoản
+
+//API đăng ký tài khoản
 exports.register = async (req, res) => {
     try {
-        const { userName, password } = req.body;
+        const { userName, password, email } = req.body;
 
-        // 🟢 Kiểm tra userName có tồn tại chưa
-        const existingAccount = await Account.findOne({ userName });
-        if (existingAccount) {
-            return res.status(400).json({ error: "Tên đăng nhập đã tồn tại!" });
+        if (!userName || !password) {
+            return res.status(400).json({ error: "Tên đăng nhập và mật khẩu không được để trống!" });
         }
 
-        // Tạo User trước, tạm dùng userName làm name
-        const newUser = new User({
-            name: userName,
-            email: req.body.email || undefined
-        });
-        await newUser.save();
+        // Kiểm tra userName có tồn tại chưa
+        const existingUser = await User.findOne({ name: userName });
+        if (existingUser) {
+            return res.status(400).json({ error: "Tên đăng nhập đã tồn tại!" });
+        }
 
         // 🟢 Mã hóa mật khẩu
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        // 🟢 Tạo tài khoản (Account) liên kết với User vừa tạo
-        const newAccount = new Account({
-            userId: newUser._id,
+        // 🟢 Tạo User mới
+        const newUser = new User({
             userName,
-            password: hashedPassword
+            password: hashedPassword,
+            email: email || "", // Tránh undefined
+            name: userName // 🔥 Đảm bảo name luôn có giá trị
         });
 
-        await newAccount.save();
+        await newUser.save();
 
         res.status(201).json({ message: "Đăng ký thành công!" });
     } catch (error) {
-        console.error("🔥 Lỗi đăng ký:", error);
-        res.status(500).json({ error: "Lỗi server" });
+        console.error("🔥 Lỗi đăng ký:", error); // In lỗi chi tiết ra console
+        res.status(500).json({ error: error.message }); // Trả về thông báo lỗi thực tế
     }
+
 };
 
+
+// 🟢 API Đăng nhập
 exports.login = async (req, res) => {
     try {
-        const { email, password } = req.body;
-
-        // Tìm tài khoản theo email
-        const userAccount = await Account.findOne({ userName: email });
-
-        if (!userAccount) {
-            return res.status(400).json({ error: "Email hoặc mật khẩu không đúng" });
-        }
-
-        // Kiểm tra mật khẩu
-        const isPasswordValid = await bcrypt.compare(password, userAccount.password);
-
-        if (!isPasswordValid) {
-            return res.status(400).json({ error: "Email hoặc mật khẩu không đúng" });
-        }
-
-        // Lấy thông tin user
-        let user = await User.findById(userAccount.userId);
-
+        const { userName, password, email } = req.body;
+        console.log(userName, password)
+        // 🟢 Tìm user theo userName
+        const user = await User.findOne({ name: userName || email });
+        console.log(user)
         if (!user) {
-            return res.status(400).json({ error: "Thông tin tài khoản không hợp lệ" });
+            return res.status(400).json({ error: "Tên đăng nhập hoặc mật khẩu không đúng" });
         }
 
-        // 🔥 Nếu email chưa lưu trong User, cập nhật lại
-        if (!user.email) {
-            user.email = email;
-            await user.save();
+        // 🟢 Kiểm tra mật khẩu
+        const isPasswordValid = await bcrypt.compare(password, user.password);
+        if (!isPasswordValid) {
+            return res.status(400).json({ error: "Tên đăng nhập hoặc mật khẩu không đúng" });
         }
 
-        // Tạo JWT token
-        const token = jwt.sign({ userId: user._id }, "secretKey", { expiresIn: "1h" });
+        console.log("🔍 Password nhập vào:", password);
+        console.log("🔍 Password từ DB:", user.password);
 
-        // Trả về kết quả
+        // 🟢 Tạo JWT token
+        const token = jwt.sign({ userId: user._id, role: user.role }, "secretKey", { expiresIn: "1h" });
+
+        // 🟢 Trả về kết quả
         res.status(200).json({
             message: "Đăng nhập thành công",
             token,
             user: {
                 _id: user._id,
-                name: user.name,
-                email: userAccount.userId.email,
-                phone: user.phone
+                userName: user.userName,
+                email: user.email,
+                phone: user.phone,
+                role: user.role
             }
         });
     } catch (error) {
@@ -90,54 +82,40 @@ exports.login = async (req, res) => {
     }
 };
 
-
-
+// 🟢 API Cập nhật thông tin người dùng
 exports.updateUser = async (req, res) => {
     try {
         const { userId } = req.params;
-        const { name, email, phone } = req.body;
+        const { userName, email, phone } = req.body;
 
-        const updatedUser = await User.findByIdAndUpdate(userId, { name, email, phone }, { new: true });
+        const updatedUser = await User.findByIdAndUpdate(userId, { userName, email, phone }, { new: true });
 
         if (!updatedUser) {
-            return res.status(404).json({ error: "User not found" });
+            return res.status(404).json({ error: "User không tồn tại" });
         }
 
-        res.status(200).json({ message: "Profile updated successfully", user: updatedUser });
-
+        res.status(200).json({ message: "Cập nhật thành công", user: updatedUser });
     } catch (error) {
         console.error("🔥 Lỗi cập nhật Profile:", error);
         res.status(500).json({ error: error.message });
     }
 };
 
+// 🟢 API Lấy thông tin người dùng
 exports.getUserInfo = async (req, res) => {
     try {
         const { id } = req.params;
 
-        // Tìm user và populate role từ Account
-        const user = await User.findById(id)
-            .select("name email phone") // Chỉ lấy những trường cần thiết từ User
-            .lean(); // Tăng hiệu suất
+        // 🟢 Tìm user (bao gồm cả role)
+        const user = await User.findById(id).populate('bookingId');
 
         if (!user) {
             return res.status(404).json({ error: "User không tồn tại" });
         }
 
-        // Lấy role từ bảng Account
-        const account = await Account.findOne({ userId: id }).select("role").lean();
-
-        res.status(200).json({
-            id: user._id,
-            name: user.name,
-            email: user.email,
-            phone: user.phone,
-            role: account?.role || "user" // Nếu không tìm thấy, mặc định 'user'
-        });
-
+        res.status(200).json(user);
     } catch (error) {
         console.error("🔥 Lỗi lấy thông tin User:", error);
         res.status(500).json({ error: error.message });
     }
 };
-

@@ -3,12 +3,13 @@ const { Booking, User, Car } = require('../model/model');
 
 exports.createBooking = async (req, res) => {
     try {
-        const { userId, name, phone, carId } = req.body;
+        const { userId, name, phone, carId, email } = req.body;
         const booking = new Booking(req.body);
 
         const updatedUser = await User.findByIdAndUpdate(
             userId,
             {
+                email,
                 name,
                 phone,
                 $push: { bookingId: booking._id, carId: carId }

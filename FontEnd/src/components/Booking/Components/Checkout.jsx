@@ -26,9 +26,9 @@ function Checkout() {
 
     const [selectedPayment, setSelectedPayment] = useState(null);
     const { setDataBooking, dataBooking } = useContext(BookingContext)
-    const { userId } = useContext(SideBarContext)
+    const { userId, userInfo } = useContext(SideBarContext)
     const { toast } = useContext(ToastContext);
-
+    console.log(userInfo)
     const pickupDate = dataBooking?.pickupDate ? new Date(dataBooking.pickupDate) : null;
     const dropOffDate = dataBooking?.dropOffDate ? new Date(dataBooking.dropOffDate) : null;
     const rentalDays = pickupDate && dropOffDate
@@ -86,7 +86,7 @@ function Checkout() {
 
                         <InputCommon label="Email"
                             required
-                            value={dataBooking?.userId?.email || ""} readOnly />
+                            value={dataBooking?.userId?.email || dataBooking?.userId?.userName || ""} readOnly />
 
                         <InputCommon label="Phone Number"
                             required

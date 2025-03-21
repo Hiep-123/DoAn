@@ -48,6 +48,12 @@ const bookingSchema = new mongoose.Schema({
 
 //nguoi dung
 const userSchema = new mongoose.Schema({
+    bookingId: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Booking'
+        }
+    ],
     name: {
         type: String,
         required: true
@@ -60,20 +66,10 @@ const userSchema = new mongoose.Schema({
     phone: {
         type: Number
     },
-
-}, [{ timestamps: true }]);
-
-//tai khoan
-const accountSchema = new mongoose.Schema({
-    userId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
-    },
     password: {
         type: String,
         required: true
     },
-
     userName: {
         type: String
     },
@@ -82,7 +78,9 @@ const accountSchema = new mongoose.Schema({
         enum: ['user', 'admin'],
         default: 'user'
     }
-}, [{ timestamps: true }])
+}, { timestamps: true });
+
+
 
 //thanh toan
 const paymentScheme = new mongoose.Schema({
@@ -158,8 +156,7 @@ let User = mongoose.model('User', userSchema);
 let Car = mongoose.model('Car', carSchema)
 let BrandCar = mongoose.model('BrandCar', brandCarShema)
 let Booking = mongoose.model('Booking', bookingSchema)
-let Account = mongoose.model('Account', accountSchema)
 let Payment = mongoose.model('Payment', paymentScheme)
 let DetailPayment = mongoose.model('DetailPayment', detailPaymentSchema)
 
-module.exports = { Car, BrandCar, User, Booking, Account, Payment, DetailPayment, Comment }
+module.exports = { Car, BrandCar, User, Booking, Payment, DetailPayment, Comment }

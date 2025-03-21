@@ -32,7 +32,8 @@ function login() {
             if (isRegister === true) {
                 await registerAuth({
                     userName: name,
-                    password
+                    password,
+                    email: name
                 })
                     .then((res) => {
                         toast.success(res.data.message);
@@ -50,7 +51,7 @@ function login() {
 
         if (!isRegister) {
             await loginAuth({
-                email: name,
+                userName: name,
                 password
             }).then((res) => {
                 setUserInfo(res.data)
@@ -64,7 +65,7 @@ function login() {
                 setIsOpen(false)
 
             }).catch((err) => {
-                toast.danger("Email or Password invalid")
+                toast.error("Email or Password invalid")
                 setIsLoading(false)
             })
         }

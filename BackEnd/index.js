@@ -31,7 +31,7 @@ app.use('/api/brandCar', brandCarRouter)
 app.use('/api/bookings', bookingRouter);
 app.use('/api/payments', paymentRouter);
 app.use('/api/comment', commentRouter)
-app.use('/api/user',authorRouter)
+app.use('/api/user', authorRouter)
 app.listen(8080, () => {
     console.log("Server is running")
 })
