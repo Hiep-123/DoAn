@@ -29,7 +29,9 @@ export default function AdminDashboard() {
     const [selectedMenu, setSelectedMenu] = useState(menuItems[0].items[0].name);
 
     return (
-        <div className="d-flex w-100">
+        <div className="d-flex w-100 " style={{
+            height: '100%'
+        }}>
             <aside className="sidebar bg-dark text-white vh-100 p-3 d-flex flex-column justify-content-between "
                 style={{
                     width: '20%'

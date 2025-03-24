@@ -12,6 +12,7 @@ const bookingRouter = require('./routes/booking');
 const paymentRouter = require('./routes/payment');
 const commentRouter = require('./routes/comment')
 const authorRouter = require('./routes/user')
+const uploadRouter = require('./routes/img')
 dotenv.config()
 
 app.use(bodyParser.json({ limit: '50mb' }));
@@ -24,6 +25,7 @@ mongoose.connect((process.env.MONGODB_URL))
         console.error('MongoDB connection error:', error);
         process.exit(1);
     });
+app.use("/uploads", express.static("uploads"));
 
 app.use('/api/car', carRouter)
 
@@ -32,6 +34,8 @@ app.use('/api/bookings', bookingRouter);
 app.use('/api/payments', paymentRouter);
 app.use('/api/comment', commentRouter)
 app.use('/api/user', authorRouter)
+app.use("/api/upload", uploadRouter);
+
 app.listen(8080, () => {
     console.log("Server is running")
 })

@@ -12,11 +12,16 @@ exports.createCar = async (req, res) => {
 };
 
 exports.getAllCars = async (req, res) => {
+  const page = parseInt(req.query.page) || 1;
+  const limit = parseInt(req.query.limit) || 6;
+  const skip = (page - 1) * limit;
+
   try {
-    const cars = await Car.find().populate('brandId');
-    res.send(cars);
+    const cars = await Car.find().skip(skip).limit(limit).populate("brandId");
+    const totalCars = await Car.countDocuments();
+    res.json({ cars, totalPages: Math.ceil(totalCars / limit) });
   } catch (error) {
-    res.status(500).send(error);
+    res.status(500).json({ message: "Lỗi server" });
   }
 };
 

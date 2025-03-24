@@ -161,6 +161,7 @@ span {
 }
 
 .button {
+    flex-grow: 1;
     margin: 20px 0;
     width: 100%;
     height: 60px;
@@ -189,6 +190,7 @@ fieldset {
 
 
 .saleBooster {
+    flex-grow: 1;
     margin-bottom: 10px;
     padding-left: 7px;
     padding-right: 7px;

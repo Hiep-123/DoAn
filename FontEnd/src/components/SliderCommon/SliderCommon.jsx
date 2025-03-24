@@ -14,7 +14,7 @@ import { getbyIdCar } from '@/apis/carService';
 function SliderCommon({ isPost, dataPost, isLoading }) {
     const { listCar } = useContext(StoreContext);
     const navigate = useNavigate();
-
+console.log(listCar)
     const CustomNextArrow = ({ onClick, isPost }) => {
         return (
             <IoIosArrowRoundForward
