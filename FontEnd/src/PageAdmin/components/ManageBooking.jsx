@@ -1,6 +1,6 @@
 // src/PageAdmin/components/ManageBooking.jsx
 import React, { useState, useEffect } from 'react';
-import { getBookings, createBooking, updateBooking, deleteBooking } from '../../bookingService.js';
+import { getBookings, createBooking, updateBooking, deleteBooking } from '@/apis/bookingService';
 
 const ManageBooking = () => {
     const [bookings, setBookings] = useState([]);

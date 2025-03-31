@@ -1,5 +1,13 @@
 import axiosClient from "./axiosClient";
 
+const addBooking = async (data) => {
+    return await axiosClient.post('/bookings/', data);
+}
+
+const getBookingId = async (id) => {
+    return await axiosClient.get(`/bookings/${id}`)
+}
+
 const getBookings = async () => {
     try {
         const response = await axios.get(API_URL);
@@ -38,3 +46,5 @@ const deleteBooking = async (id) => {
         throw error;
     }
 };
+
+export { deleteBooking, updateBooking, createBooking, getBookings, addBooking, getBookingId }
