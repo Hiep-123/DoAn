@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import ManageBooking from "./ManageBooking";
 import ManageBrandCar from "./ManageBrandCar";
 import ManageCar from "./ManageCar";
@@ -10,6 +10,7 @@ import { BsCarFrontFill } from "react-icons/bs";
 import { MdOutlinePayment } from "react-icons/md";
 import { LuUserRoundCog } from "react-icons/lu";
 import { Dropdown } from "react-bootstrap"; // Import Bootstrap Dropdown
+import { SideBarContext } from '@/context/sideBarProvider';
 
 const menuItems = [
     {
@@ -27,6 +28,7 @@ const menuItems = [
 
 export default function AdminDashboard() {
     const [selectedMenu, setSelectedMenu] = useState(menuItems[0].items[0].name);
+    const { handleLogOut } = useContext(SideBarContext);
 
     return (
         <div className="d-flex w-100 " style={{
@@ -68,7 +70,8 @@ export default function AdminDashboard() {
 
                         <Dropdown.Menu variant="dark" className="shadow " style={{ fontSize: "1.2rem", width: '100%', marginLeft: '130px' }}> {/* Tăng font-size */}
                             <Dropdown.Item href="/profile">👤 Profile</Dropdown.Item>
-                            <Dropdown.Item href="/logout">🚪 Logout</Dropdown.Item>
+                            <Dropdown.Item href="/"
+                                onClick={handleLogOut}>🚪 Logout</Dropdown.Item>
                         </Dropdown.Menu>
                     </Dropdown>
                 </div>

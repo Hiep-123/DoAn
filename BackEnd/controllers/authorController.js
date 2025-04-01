@@ -58,11 +58,9 @@ exports.login = async (req, res) => {
             return res.status(400).json({ error: "Tên đăng nhập hoặc mật khẩu không đúng" });
         }
 
-        console.log("🔍 Password nhập vào:", password);
-        console.log("🔍 Password từ DB:", user.password);
 
         // 🟢 Tạo JWT token
-        const token = jwt.sign({ userId: user._id, role: user.role }, "secretKey", { expiresIn: "1h" });
+        const token = jwt.sign({ userId: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: "1h" });
 
         // 🟢 Trả về kết quả
         res.status(200).json({

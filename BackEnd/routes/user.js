@@ -9,7 +9,7 @@ router.post("/register", register);
 router.post("/login", login);
 
 // 🟢 API lấy danh sách người dùng (cần đăng nhập)
-router.get("/users", authMiddleware, async (req, res) => {
+router.get("/", authMiddleware, async (req, res) => {
     try {
         const users = await User.find();
         res.status(200).json(users);
@@ -19,6 +19,6 @@ router.get("/users", authMiddleware, async (req, res) => {
     }
 });
 router.get("/getInfo/:id", getUserInfo);
-router.put("/updateUser/:userId", updateUser);
+router.put("/:id", updateUser);
 
 module.exports = router;

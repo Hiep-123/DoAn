@@ -10,15 +10,15 @@ const axiosClient = axios.create({
 });
 
 axiosClient.interceptors.request.use(async (config) => {
-
-    const token = Cookies.get('token')
+    const token = Cookies.get('token'); // Lấy token từ cookie
     if (token) {
-        config.headers.Authorization = `Bearer ${token}`
+        config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
 }, (err) => {
-    return Promise.reject(err)
-})
+    return Promise.reject(err);
+});
+
 
 // axiosClient.interceptors.response.use((res) => {
 
