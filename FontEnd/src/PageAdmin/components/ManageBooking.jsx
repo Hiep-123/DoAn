@@ -1,21 +1,16 @@
-// src/PageAdmin/components/ManageBooking.jsx
-import React, { useState, useEffect } from 'react';
-import { getBookings, createBooking, updateBooking, deleteBooking } from '@/apis/bookingService';
+import React, { useState, useEffect } from "react";
+import { Modal, Button, Form, Table } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { getBookings, createBooking, updateBooking, deleteBooking } from "@/apis/bookingService";
 
 const ManageBooking = () => {
     const [bookings, setBookings] = useState([]);
-    const [newBooking, setNewBooking] = useState({
-        userId: '',
-        carId: '',
-        pickupAddress: '',
-        pickupDate: '',
-        pickupTime: '',
-        dropOffAddress: '',
-        dropOffTime: '',
-        dropOffDate: '',
-        status: 'pending',
-    });
-    const [editBooking, setEditBooking] = useState(null);
+    const [bookingData, setBookingData] = useState(initialBookingState());
+    const [editingId, setEditingId] = useState(null);
+    const [showModal, setShowModal] = useState(false);
+    const [isAdding, setIsAdding] = useState(false);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [deleteId, setDeleteId] = useState(null);
 
     useEffect(() => {
         fetchBookings();
@@ -24,190 +19,261 @@ const ManageBooking = () => {
     const fetchBookings = async () => {
         try {
             const data = await getBookings();
+            console.log("Bookings data:", data); // Kiểm tra dữ liệu trả về
             setBookings(data);
         } catch (error) {
-            console.error('Failed to fetch bookings:', error);
+            console.error("Failed to fetch bookings:", error);
+            alert("Lỗi khi tải danh sách bookings!");
         }
     };
 
-    const handleCreateBooking = async () => {
+    const handleSubmit = async (e) => {
+        e.preventDefault();
         try {
-            const createdBooking = await createBooking(newBooking);
-            setBookings([...bookings, createdBooking]);
-            setNewBooking({
-                userId: '',
-                carId: '',
-                pickupAddress: '',
-                pickupDate: '',
-                pickupTime: '',
-                dropOffAddress: '',
-                dropOffTime: '',
-                dropOffDate: '',
-                status: 'pending',
-            });
+            if (isAdding) {
+                await createBooking(bookingData);
+                alert("Thêm booking thành công!");
+            } else {
+                await updateBooking(editingId, bookingData);
+                alert("Cập nhật booking thành công!");
+            }
+            setShowModal(false);
+            fetchBookings();
         } catch (error) {
-            console.error('Failed to create booking:', error);
+            console.error("Failed to save booking:", error);
+            alert("Lỗi khi lưu booking!");
         }
     };
 
-    const handleUpdateBooking = async (id) => {
+    const handleDelete = async () => {
         try {
-            const updatedBooking = await updateBooking(id, editBooking);
-            setBookings(bookings.map(booking => booking._id === id ? updatedBooking : booking));
-            setEditBooking(null);
+            await deleteBooking(deleteId);
+            alert("Xóa booking thành công!");
+            setShowDeleteModal(false);
+            fetchBookings();
         } catch (error) {
-            console.error('Failed to update booking:', error);
+            console.error("Failed to delete booking:", error);
+            alert("Lỗi khi xóa booking!");
         }
     };
 
-    const handleDeleteBooking = async (id) => {
-        try {
-            await deleteBooking(id);
-            setBookings(bookings.filter(booking => booking._id !== id));
-        } catch (error) {
-            console.error('Failed to delete booking:', error);
-        }
+    const openAddModal = () => {
+        setBookingData(initialBookingState());
+        setIsAdding(true);
+        setShowModal(true);
+    };
+
+    const openEditModal = (booking) => {
+        setBookingData({
+            userId: booking.userId?._id || booking.userId,
+            carId: booking.carId?._id || booking.carId,
+            pickupAddress: booking.pickupAddress,
+            dropOffAddress: booking.dropOffAddress,
+            pickupDate: booking.pickupDate,
+            dropOffDate: booking.dropOffDate,
+            pickupTime: booking.pickupTime,
+            dropOffTime: booking.dropOffTime,
+            status: booking.status,
+        });
+        setEditingId(booking._id);
+        setIsAdding(false);
+        setShowModal(true);
+    };
+
+    const openDeleteModal = (id) => {
+        setDeleteId(id);
+        setShowDeleteModal(true);
     };
 
     return (
-        <div>
-            <h1>Manage Bookings</h1>
-            <div>
-                <h2>Create Booking</h2>
-                <input
-                    type="text"
-                    placeholder="User ID"
-                    value={newBooking.userId}
-                    onChange={(e) => setNewBooking({ ...newBooking, userId: e.target.value })}
-                />
-                <input
-                    type="text"
-                    placeholder="Car ID"
-                    value={newBooking.carId}
-                    onChange={(e) => setNewBooking({ ...newBooking, carId: e.target.value })}
-                />
-                <input
-                    type="text"
-                    placeholder="Pickup Address"
-                    value={newBooking.pickupAddress}
-                    onChange={(e) => setNewBooking({ ...newBooking, pickupAddress: e.target.value })}
-                />
-                <input
-                    type="date"
-                    placeholder="Pickup Date"
-                    value={newBooking.pickupDate}
-                    onChange={(e) => setNewBooking({ ...newBooking, pickupDate: e.target.value })}
-                />
-                <input
-                    type="text"
-                    placeholder="Pickup Time"
-                    value={newBooking.pickupTime}
-                    onChange={(e) => setNewBooking({ ...newBooking, pickupTime: e.target.value })}
-                />
-                <input
-                    type="text"
-                    placeholder="Drop Off Address"
-                    value={newBooking.dropOffAddress}
-                    onChange={(e) => setNewBooking({ ...newBooking, dropOffAddress: e.target.value })}
-                />
-                <input
-                    type="text"
-                    placeholder="Drop Off Time"
-                    value={newBooking.dropOffTime}
-                    onChange={(e) => setNewBooking({ ...newBooking, dropOffTime: e.target.value })}
-                />
-                <input
-                    type="date"
-                    placeholder="Drop Off Date"
-                    value={newBooking.dropOffDate}
-                    onChange={(e) => setNewBooking({ ...newBooking, dropOffDate: e.target.value })}
-                />
-                <select
-                    value={newBooking.status}
-                    onChange={(e) => setNewBooking({ ...newBooking, status: e.target.value })}
-                >
-                    <option value="pending">Pending</option>
-                    <option value="approved">Approved</option>
-                    <option value="cancelled">Cancelled</option>
-                </select>
-                <button onClick={handleCreateBooking}>Create</button>
+        <div className="container mt-4">
+            <h2 className="text-center mb-4">Quản lý Bookings</h2>
+            <div className="d-flex justify-content-end mb-3">
+                <Button variant="success" onClick={openAddModal}>
+                    + Thêm Booking
+                </Button>
             </div>
-            <div>
-                <h2>Bookings</h2>
-                <ul>
-                    {bookings.map(booking => (
-                        <li key={booking._id}>
-                            <span>{booking.pickupAddress} - {booking.dropOffAddress}</span>
-                            <button onClick={() => setEditBooking(booking)}>Edit</button>
-                            <button onClick={() => handleDeleteBooking(booking._id)}>Delete</button>
-                        </li>
-                    ))}
-                </ul>
+            <div className="table-responsive">
+                <Table bordered hover>
+                    <thead className="text-center">
+                        <tr>
+                            <th>STT</th>
+                            <th>User</th>
+                            <th>Car</th>
+                            <th>Pickup Address</th>
+                            <th>Drop Off Address</th>
+                            <th>Pickup Date</th>
+                            <th>Drop Off Date</th>
+                            <th>Trạng thái</th>
+                            <th>Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {Array.isArray(bookings) && bookings.length > 0 ? (
+                            bookings.map((booking, index) => (
+                                <tr key={booking._id}>
+                                    <td className="text-center">{index + 1}</td>
+                                    <td>{booking.userId?.name || "Không xác định"}</td>
+                                    <td>{booking.carId?.category || "Không xác định"}</td>
+                                    <td>{booking.pickupAddress}</td>
+                                    <td>{booking.dropOffAddress}</td>
+                                    <td>{new Date(booking.pickupDate).toLocaleDateString()}</td>
+                                    <td>{new Date(booking.dropOffDate).toLocaleDateString()}</td>
+                                    <td>{booking.status}</td>
+                                    <td className="text-center">
+                                        <Button
+                                            variant="warning"
+                                            className="me-2"
+                                            onClick={() => openEditModal(booking)}
+                                        >
+                                            Sửa
+                                        </Button>
+                                        <Button
+                                            variant="danger"
+                                            onClick={() => openDeleteModal(booking._id)}
+                                        >
+                                            Xóa
+                                        </Button>
+                                    </td>
+                                </tr>
+                            ))
+                        ) : (
+                            <tr>
+                                <td colSpan="9" className="text-center">
+                                    Không có dữ liệu
+                                </td>
+                            </tr>
+                        )}
+                    </tbody>
+                </Table>
             </div>
-            {editBooking && (
-                <div>
-                    <h2>Edit Booking</h2>
-                    <input
-                        type="text"
-                        placeholder="User ID"
-                        value={editBooking.userId}
-                        onChange={(e) => setEditBooking({ ...editBooking, userId: e.target.value })}
-                    />
-                    <input
-                        type="text"
-                        placeholder="Car ID"
-                        value={editBooking.carId}
-                        onChange={(e) => setEditBooking({ ...editBooking, carId: e.target.value })}
-                    />
-                    <input
-                        type="text"
-                        placeholder="Pickup Address"
-                        value={editBooking.pickupAddress}
-                        onChange={(e) => setEditBooking({ ...editBooking, pickupAddress: e.target.value })}
-                    />
-                    <input
-                        type="date"
-                        placeholder="Pickup Date"
-                        value={editBooking.pickupDate}
-                        onChange={(e) => setEditBooking({ ...editBooking, pickupDate: e.target.value })}
-                    />
-                    <input
-                        type="text"
-                        placeholder="Pickup Time"
-                        value={editBooking.pickupTime}
-                        onChange={(e) => setEditBooking({ ...editBooking, pickupTime: e.target.value })}
-                    />
-                    <input
-                        type="text"
-                        placeholder="Drop Off Address"
-                        value={editBooking.dropOffAddress}
-                        onChange={(e) => setEditBooking({ ...editBooking, dropOffAddress: e.target.value })}
-                    />
-                    <input
-                        type="text"
-                        placeholder="Drop Off Time"
-                        value={editBooking.dropOffTime}
-                        onChange={(e) => setEditBooking({ ...editBooking, dropOffTime: e.target.value })}
-                    />
-                    <input
-                        type="date"
-                        placeholder="Drop Off Date"
-                        value={editBooking.dropOffDate}
-                        onChange={(e) => setEditBooking({ ...editBooking, dropOffDate: e.target.value })}
-                    />
-                    <select
-                        value={editBooking.status}
-                        onChange={(e) => setEditBooking({ ...editBooking, status: e.target.value })}
-                    >
-                        <option value="pending">Pending</option>
-                        <option value="approved">Approved</option>
-                        <option value="cancelled">Cancelled</option>
-                    </select>
-                    <button onClick={() => handleUpdateBooking(editBooking._id)}>Update</button>
-                </div>
-            )}
+
+            {/* Modal Thêm / Sửa */}
+            <Modal show={showModal} onHide={() => setShowModal(false)} size="lg">
+                <Modal.Header closeButton>
+                    <Modal.Title>{isAdding ? "Thêm Booking" : "Chỉnh Sửa Booking"}</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Form onSubmit={handleSubmit}>
+                        <Form.Group className="mb-3">
+                            <Form.Label>User ID</Form.Label>
+                            <Form.Control
+                                type="text"
+                                value={bookingData.userId}
+                                onChange={(e) => setBookingData({ ...bookingData, userId: e.target.value })}
+                                required
+                            />
+                        </Form.Group>
+                        <Form.Group className="mb-3">
+                            <Form.Label>Car ID</Form.Label>
+                            <Form.Control
+                                type="text"
+                                value={bookingData.carId}
+                                onChange={(e) => setBookingData({ ...bookingData, carId: e.target.value })}
+                                required
+                            />
+                        </Form.Group>
+                        <Form.Group className="mb-3">
+                            <Form.Label>Pickup Address</Form.Label>
+                            <Form.Control
+                                type="text"
+                                value={bookingData.pickupAddress}
+                                onChange={(e) => setBookingData({ ...bookingData, pickupAddress: e.target.value })}
+                                required
+                            />
+                        </Form.Group>
+                        <Form.Group className="mb-3">
+                            <Form.Label>Drop Off Address</Form.Label>
+                            <Form.Control
+                                type="text"
+                                value={bookingData.dropOffAddress}
+                                onChange={(e) => setBookingData({ ...bookingData, dropOffAddress: e.target.value })}
+                                required
+                            />
+                        </Form.Group>
+                        <Form.Group className="mb-3">
+                            <Form.Label>Pickup Date</Form.Label>
+                            <Form.Control
+                                type="date"
+                                value={bookingData.pickupDate}
+                                onChange={(e) => setBookingData({ ...bookingData, pickupDate: e.target.value })}
+                                required
+                            />
+                        </Form.Group>
+                        <Form.Group className="mb-3">
+                            <Form.Label>Drop Off Date</Form.Label>
+                            <Form.Control
+                                type="date"
+                                value={bookingData.dropOffDate}
+                                onChange={(e) => setBookingData({ ...bookingData, dropOffDate: e.target.value })}
+                                required
+                            />
+                        </Form.Group>
+                        <Form.Group className="mb-3">
+                            <Form.Label>Pickup Time</Form.Label>
+                            <Form.Control
+                                type="text"
+                                value={bookingData.pickupTime}
+                                onChange={(e) => setBookingData({ ...bookingData, pickupTime: e.target.value })}
+                                required
+                            />
+                        </Form.Group>
+                        <Form.Group className="mb-3">
+                            <Form.Label>Drop Off Time</Form.Label>
+                            <Form.Control
+                                type="text"
+                                value={bookingData.dropOffTime}
+                                onChange={(e) => setBookingData({ ...bookingData, dropOffTime: e.target.value })}
+                                required
+                            />
+                        </Form.Group>
+                        <Form.Group className="mb-3">
+                            <Form.Label>Trạng thái</Form.Label>
+                            <Form.Select
+                                value={bookingData.status}
+                                onChange={(e) => setBookingData({ ...bookingData, status: e.target.value })}
+                            >
+                                <option value="pending">Pending</option>
+                                <option value="approved">Approved</option>
+                                <option value="cancelled">Cancelled</option>
+                            </Form.Select>
+                        </Form.Group>
+                        <Button type="submit" variant="success">
+                            Lưu
+                        </Button>
+                    </Form>
+                </Modal.Body>
+            </Modal>
+
+            {/* Modal Xóa */}
+            <Modal show={showDeleteModal} onHide={() => setShowDeleteModal(false)}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Xác nhận xóa</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>Bạn có chắc chắn muốn xóa booking này không?</Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={() => setShowDeleteModal(false)}>
+                        Hủy
+                    </Button>
+                    <Button variant="danger" onClick={handleDelete}>
+                        Xóa
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </div>
     );
 };
+
+const initialBookingState = () => ({
+    userId: "",
+    carId: "",
+    pickupAddress: "",
+    dropOffAddress: "",
+    pickupDate: "",
+    dropOffDate: "",
+    pickupTime: "",
+    dropOffTime: "",
+    status: "pending",
+});
 
 export default ManageBooking;
