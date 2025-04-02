@@ -35,10 +35,12 @@ exports.createBooking = async (req, res) => {
 
 exports.getAllBookings = async (req, res) => {
     try {
-        const bookings = await Booking.find({});
-        res.status(200).send(bookings);
+        const bookings = await Booking.find()
+            .populate('userId') // Lấy thông tin name và email từ User
+            .populate('carId'); // Lấy thông tin category và brandId từ Car
+        res.json(bookings);
     } catch (error) {
-        res.status(500).send(error);
+        res.status(500).json({ error: 'Failed to fetch bookings' });
     }
 };
 
