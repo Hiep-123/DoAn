@@ -58,7 +58,7 @@ function Header() {
                                 position: 'relative'
                             }} >
                             {!userId && <CiUser size={'25px'} />}
-                            {userId ? `Xin chào, ${userInfo?.email || userInfo?.userName}` : 'Sign in'}
+                            {userId ? `Xin chào, ${userInfo?.userName}` : 'Sign in'}
 
                             {/* Dropdown Logout */}
                             {showDropdown && userId && (

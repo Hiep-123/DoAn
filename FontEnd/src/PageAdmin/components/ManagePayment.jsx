@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useContext } from "react";
-import { getPayments, createPayment, updatePayment, deletePayment } from "@/apis/PaymentService";
+import { getPayments, createPayment, updatePayment, deletePayment, getDetailPayment } from "@/apis/paymentService";
 import { ToastContext } from "@/context/ToastProvider";
 import { Modal, Button, Form } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { getUsers } from "../../apis/userService";
 
 const ManagePayment = () => {
-    const [users,setUsers]=useState([])
     const [payments, setPayments] = useState([]);
+    const [detailPayments, setDetailPayments] = useState([]);
     const [paymentData, setPaymentData] = useState({
+        name: "",
         userId: "",
         bookingId: "",
         method: "cash",
@@ -20,12 +20,23 @@ const ManagePayment = () => {
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [deleteId, setDeleteId] = useState(null);
     const { toast } = useContext(ToastContext);
+    const [totalRevenue, setTotalRevenue] = useState(0); // Thêm state cho tổng doanh thu
 
     useEffect(() => {
         fetchPayments();
+        fetchDetailPayment();
     }, []);
 
-    
+    const fetchDetailPayment = async () => {
+        try {
+            await getDetailPayment().then((res) => {
+                setDetailPayments(res.data);
+                calculateTotalRevenue(res.data); // Tính tổng doanh thu mỗi khi cập nhật danh sách chi tiết payment
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
     const fetchPayments = async () => {
         try {
@@ -73,25 +84,24 @@ const ManagePayment = () => {
         }
     };
 
+    // Hàm tính tổng doanh thu
+    const calculateTotalRevenue = (detailPayments) => {
+        let total = 0;
+        detailPayments.forEach(detail => {
+            total += detail.totalAmount || 0; // Cộng tổng tiền (totalAmount) của mỗi payment
+        });
+        setTotalRevenue(total); // Cập nhật tổng doanh thu
+    };
+
     return (
         <div className="container-fluid mt-4">
             <h2 className="text-center fs-3 mb-3">Quản lý Payments</h2>
+            {/* Hiển thị tổng doanh thu */}
             <div className="d-flex justify-content-end mt-4 mb-3">
-                <button
-                    className="btn btn-success fs-4 px-4 py-2"
-                    onClick={() => {
-                        setPaymentData({
-                            userId: "",
-                            bookingId: "",
-                            method: "cash",
-                            paymentStatus: "pending",
-                        });
-                        setIsAdding(true);
-                        setShowModal(true);
-                    }}
-                >
-                    + Thêm Payment
-                </button>
+                <h4>Tổng Doanh Thu: {totalRevenue} $</h4>
+            </div>
+            <div className="d-flex justify-content-end mt-4 mb-3">
+
             </div>
             <div className="table-responsive">
                 <table className="table table-bordered w-100">
@@ -100,24 +110,39 @@ const ManagePayment = () => {
                             <th>STT</th>
                             <th>Người dùng</th>
                             <th>Booking</th>
+                            <th>Số lượng xe</th>
+                            <th>Tổng tiền</th>
                             <th>Phương thức</th>
                             <th>Trạng thái</th>
                             <th>Hành động</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody className="text-center">
                         {payments.map((payment, index) => (
                             <tr key={payment._id}>
                                 <td className="fs-5 text-center">{index + 1}</td>
-                                <td className="fs-5">{payment.userId}</td>
-                                <td className="fs-5">{payment.bookingId}</td>
+                                <td className="fs-5">
+                                    {typeof payment.userId === "object" ? payment.userId.name || payment.userId._id : payment.userId}
+                                </td>
+                                <td className="fs-5">
+                                    {typeof payment.bookingId === "object" ? payment.bookingId._id : payment.bookingId}
+                                </td>
+                                <td className="fs-5">{detailPayments.find(detailPayment => payment._id === detailPayment.paymentId)?.amountCar || "Không xác định"}</td>
+                                <td className="fs-5">{detailPayments.find(detailPayment => payment._id === detailPayment.paymentId)?.totalAmount || "Không xác định"} $</td>
+
                                 <td className="fs-5">{payment.method}</td>
                                 <td className="fs-5">{payment.paymentStatus}</td>
                                 <td className="d-flex justify-content-around">
                                     <button
                                         className="btn btn-warning fs-5"
                                         onClick={() => {
-                                            setPaymentData(payment);
+                                            setPaymentData({
+                                                name: typeof payment.userId === "object" ? payment.userId.name : payment.userId,
+                                                userId: typeof payment.userId === "object" ? payment.userId._id : payment.userId,
+                                                bookingId: typeof payment.bookingId === "object" ? payment.bookingId._id : payment.bookingId,
+                                                method: payment.method,
+                                                paymentStatus: payment.paymentStatus,
+                                            });
                                             setEditingId(payment._id);
                                             setIsAdding(false);
                                             setShowModal(true);
@@ -152,8 +177,7 @@ const ManagePayment = () => {
                             <Form.Label>Người dùng</Form.Label>
                             <Form.Control
                                 type="text"
-                                value={paymentData.userId}
-                                onChange={(e) => setPaymentData({ ...paymentData, userId: e.target.value })}
+                                value={paymentData.name}
                                 required
                             />
                         </Form.Group>
@@ -166,6 +190,7 @@ const ManagePayment = () => {
                                 required
                             />
                         </Form.Group>
+
                         <Form.Group className="mb-3">
                             <Form.Label>Phương thức</Form.Label>
                             <Form.Select
@@ -183,7 +208,7 @@ const ManagePayment = () => {
                                 onChange={(e) => setPaymentData({ ...paymentData, paymentStatus: e.target.value })}
                             >
                                 <option value="pending">Pending</option>
-                                <option value="complete">Complete</option>
+                                <option value="completed">Completed</option>
                                 <option value="failed">Failed</option>
                             </Form.Select>
                         </Form.Group>

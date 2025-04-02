@@ -40,7 +40,7 @@ const bookingSchema = new mongoose.Schema({
     dropOffDate: Date,
     status: {
         type: String,
-        enum: ['pending', 'approved', 'cancelled'],
+        enum: ['pending', 'completed', 'cancelled'],
         default: 'pending'
     },
 
@@ -64,7 +64,7 @@ const userSchema = new mongoose.Schema({
         sparse: true
     },
     phone: {
-        type: Number
+        type: String
     },
     password: {
         type: String,

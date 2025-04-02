@@ -67,10 +67,12 @@ const ManageBooking = () => {
         setBookingData({
             userId: booking.userId?._id || booking.userId,
             carId: booking.carId?._id || booking.carId,
+            car: booking.carId?.category,
+            name: booking.userId?.name,
             pickupAddress: booking.pickupAddress,
             dropOffAddress: booking.dropOffAddress,
-            pickupDate: booking.pickupDate,
-            dropOffDate: booking.dropOffDate,
+            pickupDate: new Date(booking.pickupDate).toISOString().split("T")[0], // Chuyển thành YYYY-MM-DD
+            dropOffDate: new Date(booking.dropOffDate).toISOString().split("T")[0], // Chuyển thành YYYY-MM-DD
             pickupTime: booking.pickupTime,
             dropOffTime: booking.dropOffTime,
             status: booking.status,
@@ -80,13 +82,14 @@ const ManageBooking = () => {
         setShowModal(true);
     };
 
+
     const openDeleteModal = (id) => {
         setDeleteId(id);
         setShowDeleteModal(true);
     };
 
     return (
-        <div className="container mt-4">
+        <div className="container-fluid mt-4 z-3">
             <h2 className="text-center mb-4">Quản lý Bookings</h2>
             <div className="d-flex justify-content-end mb-3">
                 <Button variant="success" onClick={openAddModal}>
@@ -153,23 +156,21 @@ const ManageBooking = () => {
                 <Modal.Header closeButton>
                     <Modal.Title>{isAdding ? "Thêm Booking" : "Chỉnh Sửa Booking"}</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>
+                <Modal.Body >
                     <Form onSubmit={handleSubmit}>
                         <Form.Group className="mb-3">
                             <Form.Label>User ID</Form.Label>
                             <Form.Control
                                 type="text"
-                                value={bookingData.userId}
-                                onChange={(e) => setBookingData({ ...bookingData, userId: e.target.value })}
+                                value={bookingData.name}
                                 required
                             />
                         </Form.Group>
                         <Form.Group className="mb-3">
-                            <Form.Label>Car ID</Form.Label>
+                            <Form.Label>Car</Form.Label>
                             <Form.Control
                                 type="text"
-                                value={bookingData.carId}
-                                onChange={(e) => setBookingData({ ...bookingData, carId: e.target.value })}
+                                value={bookingData.car}
                                 required
                             />
                         </Form.Group>
@@ -234,7 +235,7 @@ const ManageBooking = () => {
                                 onChange={(e) => setBookingData({ ...bookingData, status: e.target.value })}
                             >
                                 <option value="pending">Pending</option>
-                                <option value="approved">Approved</option>
+                                <option value="completed">completed</option>
                                 <option value="cancelled">Cancelled</option>
                             </Form.Select>
                         </Form.Group>

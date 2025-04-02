@@ -6,6 +6,9 @@ import { getUsers, updateInfoUser, registerAuth, deleteUser } from "@/apis/userS
 function ManageUsers() {
   const [users, setUsers] = useState([]);
   const [userData, setUserData] = useState({
+    phone: "",
+    userName: "",
+    password: "",
     name: "",
     email: "",
     role: "user",
@@ -16,7 +19,6 @@ function ManageUsers() {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
   const { toast } = useContext(ToastContext);
-
   useEffect(() => {
     fetchUsers();
   }, []);
@@ -32,8 +34,10 @@ function ManageUsers() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
       if (isAdding) {
+        console.log(userData)
         await registerAuth(userData); // Gọi API thêm người dùng
         toast.success("Thêm người dùng thành công!");
       } else {
@@ -79,7 +83,9 @@ function ManageUsers() {
             <tr className="fs-4 text-center">
               <th>STT</th>
               <th>Tên</th>
+              <th>User name</th>
               <th>Email</th>
+              <th>Phone</th>
               <th>Vai trò</th>
               <th>Hành động</th>
             </tr>
@@ -89,7 +95,10 @@ function ManageUsers() {
               <tr key={user._id}>
                 <td className="fs-5 text-center">{index + 1}</td>
                 <td className="fs-5">{user.name}</td>
+                <td className="fs-5">{user.userName}</td>
                 <td className="fs-5">{user.email}</td>
+                <td className="fs-5">{user.phone}</td>
+
                 <td className="fs-5">{user.role}</td>
                 <td className="d-flex justify-content-around">
                   <button
@@ -136,11 +145,38 @@ function ManageUsers() {
               />
             </Form.Group>
             <Form.Group className="mb-3">
+              <Form.Label>User Name</Form.Label>
+              <Form.Control
+                type="text"
+                value={userData.userName}
+                onChange={(e) => setUserData({ ...userData, userName: e.target.value })}
+                required
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+                type="text"
+                value={userData.password}
+                onChange={(e) => setUserData({ ...userData, password: e.target.value })}
+                required
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
               <Form.Label>Email</Form.Label>
               <Form.Control
                 type="email"
                 value={userData.email}
                 onChange={(e) => setUserData({ ...userData, email: e.target.value })}
+                required
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Phone</Form.Label>
+              <Form.Control
+                type="text"
+                value={userData.phone}
+                onChange={(e) => setUserData({ ...userData, phone: e.target.value })}
                 required
               />
             </Form.Group>

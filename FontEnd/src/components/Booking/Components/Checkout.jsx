@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import Header from "@components/Header/Header";
 import Banner from "@components/Banner/Banner";
-import { data, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { getBookingId } from "@/apis/bookingService";
 import InputCommon from "@components/InputCommon/InputCommon";
 import styles from "../styles.module.scss";
