@@ -45,12 +45,14 @@ exports.createPayment = async (req, res) => {
 
 exports.getAllPayments = async (req, res) => {
     try {
-        const payments = await Payment.find({});
-        res.status(200).send(payments);
+        const payments = await Payment.find().populate('userId') // Lấy toàn bộ thông tin userId
+        res.status(200).json(payments);
     } catch (error) {
-        res.status(500).send(error);
+        console.error('Error:', error);
+        res.status(500).json({ message: "Lỗi server", error });
     }
 };
+
 
 exports.getPaymentById = async (req, res) => {
     try {
