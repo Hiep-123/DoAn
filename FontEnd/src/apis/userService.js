@@ -7,7 +7,7 @@ export const getUsers = async () => {
 
 // Thêm người dùng mới
 export const registerAuth = async (data) => {
-    return await axiosClient.post("/user", data); // Endpoint thêm người dùng
+    return await axiosClient.post("/user/register", data); // Endpoint thêm người dùng
 };
 
 // Cập nhật thông tin người dùng

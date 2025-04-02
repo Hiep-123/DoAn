@@ -33,9 +33,10 @@ exports.createBooking = async (req, res) => {
     }
 };
 
+
 exports.getAllBookings = async (req, res) => {
     try {
-        const bookings = await Booking.find({});
+        const bookings = await Booking.find({}).populate('userId').populate('carId');
         res.status(200).send(bookings);
     } catch (error) {
         res.status(500).send(error);

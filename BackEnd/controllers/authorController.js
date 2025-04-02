@@ -6,7 +6,8 @@ const jwt = require("jsonwebtoken");
 //API đăng ký tài khoản
 exports.register = async (req, res) => {
     try {
-        const { userName, password, email } = req.body;
+        const { userName, password, email, phone } = req.body;
+        console.log(req.body)
 
         if (!userName || !password) {
             return res.status(400).json({ error: "Tên đăng nhập và mật khẩu không được để trống!" });
@@ -26,7 +27,8 @@ exports.register = async (req, res) => {
             userName,
             password: hashedPassword,
             email: email || "", // Tránh undefined
-            name: userName // 🔥 Đảm bảo name luôn có giá trị
+            name: userName, // 🔥 Đảm bảo name luôn có giá trị
+            phone: phone
         });
 
         await newUser.save();
@@ -46,7 +48,7 @@ exports.login = async (req, res) => {
         const { userName, password, email } = req.body;
         console.log(userName, password)
         // 🟢 Tìm user theo userName
-        const user = await User.findOne({ name: userName || email });
+        const user = await User.findOne({ userName });
         console.log(user)
         if (!user) {
             return res.status(400).json({ error: "Tên đăng nhập hoặc mật khẩu không đúng" });
@@ -80,13 +82,13 @@ exports.login = async (req, res) => {
     }
 };
 
+
 // 🟢 API Cập nhật thông tin người dùng
 exports.updateUser = async (req, res) => {
     try {
-        const { userId } = req.params;
-        const { userName, email, phone } = req.body;
-
-        const updatedUser = await User.findByIdAndUpdate(userId, { userName, email, phone }, { new: true });
+        const { userName, email, phone, name, role } = req.body;
+        console.log(req.body)
+        const updatedUser = await User.findByIdAndUpdate(req.params.id, { userName, email, phone, name, role }, { new: true });
 
         if (!updatedUser) {
             return res.status(404).json({ error: "User không tồn tại" });
@@ -117,3 +119,13 @@ exports.getUserInfo = async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 };
+
+exports.deleteUser = async (req, res) => {
+    try {
+        const user = await User.findByIdAndDelete(req.params.id);
+        if (!user) return res.status(404).send('User not found');
+        res.send(user);
+    } catch (error) {
+        res.status(500).send(error);
+    }
+}

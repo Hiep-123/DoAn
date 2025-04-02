@@ -1,7 +1,7 @@
 const express = require("express");
 const { authMiddleware } = require("../middleware/authMiddleware");
 const { User } = require("../model/model");
-const { register, login, getUserInfo, updateUser } = require("../controllers/authorController");
+const { register, login, getUserInfo, updateUser, deleteUser } = require("../controllers/authorController");
 const router = express.Router();
 
 
@@ -20,5 +20,5 @@ router.get("/", authMiddleware, async (req, res) => {
 });
 router.get("/getInfo/:id", getUserInfo);
 router.put("/:id", updateUser);
-
+router.delete("/:id", deleteUser)
 module.exports = router;
