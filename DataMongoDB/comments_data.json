@@ -1,0 +1,2 @@
+{"_id":{"$oid":"67d62e8f73852c655beeaacf"},"bookingId":null,"userId":{"$oid":"67d55eaf36112bdca820da4f"},"ratingPoints":5,"comment":"djask","__v":0}
+{"_id":{"$oid":"67ee3699250e7534bd47cd9d"},"bookingId":null,"userId":{"$oid":"67dd31689d59afc6ba629d8d"},"ratingPoints":4,"comment":"dasda","__v":0}

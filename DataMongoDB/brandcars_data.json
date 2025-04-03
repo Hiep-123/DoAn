@@ -1,0 +1,5 @@
+{"_id":{"$oid":"67cd240be895c5e5487f531f"},"nameBrandCar":"Electric","__v":0}
+{"_id":{"$oid":"67cd244ce895c5e5487f5325"},"nameBrandCar":"Convertible","__v":0}
+{"_id":{"$oid":"67ce91ac426de9e0ddc8332a"},"nameBrandCar":"Compact","__v":0}
+{"_id":{"$oid":"67ce92ab426de9e0ddc8332c"},"nameBrandCar":"Minivan","__v":0}
+{"_id":{"$oid":"67ce99768c6d774332cd9364"},"nameBrandCar":"Racing","__v":0}
