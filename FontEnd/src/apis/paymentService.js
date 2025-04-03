@@ -23,3 +23,7 @@ export const deletePayment = async (id) => {
 export const getDetailPayment = async () => {
     return await axiosClient.get('/payments/detailPayment')
 }
+
+export const getMonthlyRevenue = async (id) =>{
+    return await axiosClient.get(`/payments/revenue/${id}`)
+}

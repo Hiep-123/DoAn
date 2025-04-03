@@ -7,7 +7,7 @@ import { IoMdEye } from "react-icons/io";
 import { ToastContext } from "@/context/ToastProvider";
 import { loginAuth, registerAuth } from '@/apis/authorService';
 import Cookies from 'js-cookie'
-import { SideBarContext } from '@/context/sideBarProvider';
+import { SideBarContext } from '@/context/SideBarProvider';
 import { useNavigate } from 'react-router-dom';
 
 function login() {

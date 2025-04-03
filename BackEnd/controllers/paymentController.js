@@ -112,3 +112,50 @@ exports.getDetailPayment = async (req, res) => {
         res.status(500).send(error);
     }
 }
+
+exports.getMonthlyRevenue = async (req, res) => {
+    try {
+        const { year } = req.params;
+        const parsedYear = parseInt(year, 10);
+
+        if (isNaN(parsedYear) || parsedYear < 2000 || parsedYear > 2100) {
+            return res.status(400).json({ message: "Năm không hợp lệ!" });
+        }
+
+        // Danh sách tháng
+        const months = [
+            "Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4",
+            "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8",
+            "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"
+        ];
+
+        // Tạo mảng chứa doanh thu từng tháng với format [{ month: 'Tháng 1', revenue: 0 }, ...]
+        let monthlyRevenue = months.map((month, index) => ({
+            month: month,
+            revenue: 0
+        }));
+
+        // Truy vấn tất cả chi tiết thanh toán trong năm
+        const payments = await DetailPayment.find({
+            createdAt: {
+                $gte: new Date(`${parsedYear}-01-01T00:00:00.000Z`),
+                $lte: new Date(`${parsedYear}-12-31T23:59:59.999Z`),
+            },
+        });
+
+        // Cập nhật doanh thu từng tháng
+        payments.forEach(payment => {
+            const monthIndex = new Date(payment.createdAt).getMonth(); // Lấy tháng (0-11)
+            monthlyRevenue[monthIndex].revenue += payment.totalAmount || 0; // Cộng dồn doanh thu
+        });
+
+        res.json({
+            year: parsedYear,
+            monthlyRevenue
+        });
+    } catch (error) {
+        console.error("🔥 Lỗi khi tính doanh thu:", error);
+        res.status(500).json({ message: "Lỗi server!" });
+    }
+};
+

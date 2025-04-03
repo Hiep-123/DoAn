@@ -4,13 +4,14 @@ import ManageBrandCar from "./ManageBrandCar";
 import ManageCar from "./ManageCar";
 import ManagePayment from "./ManagePayment";
 import ManageUsers from "./ManageUsers";
+import Revenue from "./Revenue";
 import { IoSettingsOutline } from "react-icons/io5";
 import { TbBrandCarbon, TbBrandBooking } from "react-icons/tb";
 import { BsCarFrontFill } from "react-icons/bs";
 import { MdOutlinePayment } from "react-icons/md";
 import { LuUserRoundCog } from "react-icons/lu";
 import { Dropdown } from "react-bootstrap"; // Import Bootstrap Dropdown
-import { SideBarContext } from '@/context/sideBarProvider';
+import { SideBarContext } from '@/context/SideBarProvider';
 
 const menuItems = [
     {
@@ -20,8 +21,8 @@ const menuItems = [
             { name: "ManageBooking", icon: <TbBrandBooking size={25} />, component: <ManageBooking /> },
             { name: "ManagePayment", icon: <MdOutlinePayment size={25} />, component: <ManagePayment /> },
             { name: "ManageUsers", icon: <LuUserRoundCog size={25} />, component: <ManageUsers /> },
-
-        ]
+            { name: "revenue", icon: <LuUserRoundCog size={25} />, component: <Revenue /> },
+        ]   
     },
 ];
 
