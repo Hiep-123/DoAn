@@ -31,7 +31,6 @@ function ShowInfoCar() {
     const [numberCar, setNumberCar] = useState('');
     const [isBookingSuccess, setIsBookingSuccess] = useState(false);
     const [bookingId, setBookingId] = useState('')
-
     const isValidGmail = (email) => {
         const gmailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
         return gmailRegex.test(email);
@@ -77,32 +76,44 @@ function ShowInfoCar() {
         };
 
         try {
-            await addBooking(data).then((res) => {
-                console.log(res)
-                setBookingId(res.data.booking._id)
+            const res = await addBooking(data);
+            console.log("API Response:", res);
+
+            if (res?.booking?._id) {  // Kiểm tra chắc chắn API có trả về booking._id
+                setBookingId(res.booking._id);
                 toast.success("You have successfully rented a car!");
                 setIsBookingSuccess(true);
-            });
+            } else {
+                toast.error("Booking failed. Please try again.");
+            }
         } catch (err) {
+            console.error("Booking Error:", err);
             toast.error("Booking failed. Please try again.");
         }
-        setDropOffAddress('')
-        setDropOffDate('')
-        setDropOffTime('')
-        setPickupAddress('')
-        setPickupDate('')
-        setPickupTime('')
-        setName('')
-        setEmail('')
-        setPhone('')
-        setNumberCar('')
     };
+
+
 
     useEffect(() => {
         if (isBookingSuccess) {
             navigate(`/shop/${ProductName}/checkout`, { state: { bookingId, numberCar } });
+
+            // Reset form sau khi navigate
+            setTimeout(() => {
+                setDropOffAddress('');
+                setDropOffDate('');
+                setDropOffTime('');
+                setPickupAddress('');
+                setPickupDate('');
+                setPickupTime('');
+                setName('');
+                setEmail('');
+                setPhone('');
+                setNumberCar('');
+            }, 500); // Delay 500ms để đảm bảo dữ liệu đã được navigate
         }
-    }, [isBookingSuccess, navigate, car.data?.name]);
+    }, [isBookingSuccess, navigate, bookingId, numberCar]);
+
 
     return (
         <div className={container} >

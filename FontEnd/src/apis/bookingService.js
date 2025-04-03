@@ -45,9 +45,9 @@ const createBooking = async (booking) => {
 };
 
 // Cập nhật booking theo ID
-const updateBooking = async (id, booking) => {
+const updateBooking = async (id, data) => {
     try {
-        const response = await axiosClient.put(`/bookings/${id}`, booking);
+        const response = await axiosClient.put(`/bookings/${id}`, data);
         return response.data;
     } catch (error) {
         console.error("Error updating booking:", error);

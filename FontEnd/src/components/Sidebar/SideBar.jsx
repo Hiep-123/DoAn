@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import styles from './styles.module.scss'
-import { SideBarContext } from '@/context/sideBarProvider';
+import { SideBarContext } from '@/context/SideBarProvider';
 import classNames from 'classnames'
 import Login from './login'
 import { MdOutlineClose } from "react-icons/md";

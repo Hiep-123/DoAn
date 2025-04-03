@@ -23,12 +23,13 @@ function Checkout() {
     const location = useLocation();
     const bookingId = location.state?.bookingId;
     const numberCar = location.state?.numberCar;
-
+    console.log(location)
+    console.log(bookingId)
+    console.log(numberCar)
     const [selectedPayment, setSelectedPayment] = useState(null);
     const { setDataBooking, dataBooking } = useContext(BookingContext)
     const { userId, userInfo } = useContext(SideBarContext)
     const { toast } = useContext(ToastContext);
-    console.log(userInfo)
     const pickupDate = dataBooking?.pickupDate ? new Date(dataBooking.pickupDate) : null;
     const dropOffDate = dataBooking?.dropOffDate ? new Date(dataBooking.dropOffDate) : null;
     const rentalDays = pickupDate && dropOffDate
@@ -36,11 +37,11 @@ function Checkout() {
         : 0;
     const pricePerDay = dataBooking?.carId?.pricePerDay || 0;
     const totalPrice = rentalDays * pricePerDay * numberCar;
-
+    console.log(dataBooking)
     const handleGetInfoBooking = async () => {
         try {
             const res = await getBookingId(bookingId);
-            setDataBooking(res.data);
+            setDataBooking(res);
         } catch (err) {
             console.error(err);
         }

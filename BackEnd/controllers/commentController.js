@@ -3,19 +3,8 @@ const { Comment, User } = require('../model/model')
 const commentController = {
     addComment: async (req, res) => {
         try {
-            let { name, email, ratingPoints, comment, userId, bookingId } = req.body;
+            let { ratingPoints, comment, userId, bookingId } = req.body;
 
-            // 🔍 Kiểm tra xem user đã tồn tại chưa
-            let user = await User.findOne({ email });
-
-            // Nếu user chưa tồn tại, tạo mới
-            if (!user) {
-                user = new User({ name, email });
-                await user.save();
-            }
-            if (!bookingId || bookingId.trim() === "") {
-                bookingId = null;
-            }
             // Tạo mới comment và liên kết với userId
             const newComment = new Comment({
                 ratingPoints,

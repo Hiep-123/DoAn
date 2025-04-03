@@ -101,7 +101,6 @@ const ManagePayment = () => {
                 <h4>Tổng Doanh Thu: {totalRevenue} $</h4>
             </div>
             <div className="d-flex justify-content-end mt-4 mb-3">
-
             </div>
             <div className="table-responsive">
                 <table className="table table-bordered w-100">
@@ -129,7 +128,6 @@ const ManagePayment = () => {
                                 </td>
                                 <td className="fs-5">{detailPayments.find(detailPayment => payment._id === detailPayment.paymentId)?.amountCar || "Không xác định"}</td>
                                 <td className="fs-5">{detailPayments.find(detailPayment => payment._id === detailPayment.paymentId)?.totalAmount || "Không xác định"} $</td>
-
                                 <td className="fs-5">{payment.method}</td>
                                 <td className="fs-5">{payment.paymentStatus}</td>
                                 <td className="d-flex justify-content-around">

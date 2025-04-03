@@ -6,7 +6,7 @@ import { CiSearch, CiUser } from "react-icons/ci";
 import Button from '../Button/Button'
 import { useNavigate } from "react-router";
 import Menu from './Menu';
-import { SideBarContext } from '@/context/sideBarProvider';
+import { SideBarContext } from '@/context/SideBarProvider';
 
 function Header() {
 
